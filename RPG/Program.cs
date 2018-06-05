@@ -1,12 +1,15 @@
-﻿using System;
-
-namespace RPG
+﻿namespace RPG
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Game game = new Game();
+
+            while (game.IsPlaying)
+            {
+                game.MainMenu();
+            }
         }
     }
 }
