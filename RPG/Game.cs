@@ -23,6 +23,7 @@ namespace RPG
             Console.WriteLine("0: Quit");
             Console.WriteLine("1: Create new character");
             Console.WriteLine("2: Show characters");
+            Console.Write("\nChoice: ");
 
             MainMenuChoice = Console.ReadKey().KeyChar.ToString();
 

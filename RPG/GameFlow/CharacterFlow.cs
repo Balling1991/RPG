@@ -9,8 +9,7 @@ namespace RPG.GameFlow
     {
         public static Character CreateNewCharacter()
         {
-            Console.WriteLine("\nPlease enter the name of your character: ");
-            Console.Write("Name: ");
+            Console.Write("\nPlease enter the name of your character: ");
             var name = Console.ReadLine();
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
@@ -24,6 +23,8 @@ namespace RPG.GameFlow
             Console.WriteLine("Please pick your hero class: ");
 
             ShowCharacterOptions(name);
+
+            Console.Write("\nClass nr.: ");
 
             var heroClass = Console.ReadKey().KeyChar.ToString();
             Console.Clear();
@@ -76,28 +77,66 @@ namespace RPG.GameFlow
             return characterList;
         }
 
-        public static void ShowCharacterList(List<Character> CharacterList)
+        public static void ShowCharacterList(List<Character> characterList)
         {
-            int characterCount = 0;
-
-            if (!CharacterList.Any())
+            if (!characterList.Any())
             {
                 Console.WriteLine("You don't have any characters yet. Go make one...");
                 Console.ReadKey();
                 Console.Clear();
             }
 
-            if(CharacterList.Any())
+            if(characterList.Any())
             {
                 Console.WriteLine("--- YOUR CHARACTERS ---");
             }
 
-            foreach (Character character in CharacterList)
-
+            for(int i = 0; i < characterList.Count; i++)
             {
-                Console.WriteLine(characterCount + ": " + character.Name + " - " + character.GetHeroClass() + " - lvl " + character.GetLevel());
-                characterCount++;
+                Console.WriteLine(i + ": " + characterList[i].Name + " - " + characterList[i].GetHeroClass() + " - lvl " + characterList[i].GetLevel());
             }
+
+            Console.WriteLine("\n\nPick the character you want to inspect:");
+            Console.WriteLine("\nGo back...");
+            Console.Write("\nCharacter nr: ");
+
+            var characterFromList = Console.ReadKey().KeyChar.ToString();
+
+            if (int.TryParse(characterFromList, out int characterNumber))
+            {
+                ShowCharacterDetails(characterList[characterNumber]);
+            } else
+            {
+                Console.Clear();
+            }
+        }
+
+        private static void ShowCharacterDetails(Character character)
+        {
+            Console.Clear();
+            Console.WriteLine($"\n!---------- CHARACTER ----------");
+            Console.WriteLine($"\n Name: {character.GetName()} ||| Class: {character.GetHeroClass()} ||| Lvl: {character.GetLevel()}");
+            Console.WriteLine($"\n!---------- STATS ----------");
+            Console.WriteLine($"\n|--- BASIC:");
+            Console.WriteLine($"|---    Exp.:             {character.GetExp()}");
+            Console.WriteLine($"|---    Exp. to level up: {character.GetExpToNextLevel()}");
+            Console.WriteLine($"|---    HP:               {character.GetMaxHP()}");
+            Console.WriteLine($"\n|--- ATTRIBUTES:");
+            Console.WriteLine($"|---    Stamina:          {character.GetStamina()}");
+            Console.WriteLine($"|---    Strength:         {character.GetStrength()}");
+            Console.WriteLine($"|---    Agility:          {character.GetAgility()}");
+            Console.WriteLine($"|---    Intellect:        {character.GetIntellect()}");
+            Console.WriteLine($"\n|--- SECONDARY:");
+            Console.WriteLine($"|---    Critical Strike:  {character.GetCriticalStrike()}");
+            Console.WriteLine($"|---    Haste:            {character.GetHaste()}");
+            Console.WriteLine($"|---    Mastery:          {character.GetMastery()}");
+            Console.WriteLine($"\n|--- OFFENSE:");
+            Console.WriteLine($"|---    Min. melee dmg:   {character.GetCriticalStrike()}");
+            Console.WriteLine($"|---    Max. melee dmg:   {character.GetHaste()}");
+            Console.WriteLine($"|---    Spell damage:     {character.GetMastery()}");
+            Console.WriteLine($"\n|--- DEFENSE:");
+            Console.WriteLine($"|---    Armor:            {character.GetCriticalStrike()}");
+            Console.WriteLine($"|---    Spell resistance: {character.GetHaste()}");
             Console.WriteLine("\nGo back...");
             Console.ReadKey();
             Console.Clear();

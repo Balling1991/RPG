@@ -46,24 +46,35 @@
             }
         }
 
-        public int GetLevel()
-        {
-            return Level;
-        }
+        // Getters
 
-        public int GetExp()
-        {
-            return Exp;
-        }
+        // Basic
+        public string GetName() => Name;
+        public HeroClass GetHeroClass() => HeroClass;
+        public int GetLevel() => Level;
+        public int GetExp() => Exp;
+        public int GetExpToNextLevel() => ((8 * Level) * (45 + (5 * Level)));
+        public int GetHP() => HP;
+        public int GetMaxHP() => MaxHP;
 
-        public int GetExpToNextLevel()
-        {
-            return ((8 * Level) * (45 + (5 * Level)));
-        }
+        // Stats
+        public int GetStamina() => Stamina;
+        public int GetStrength() => Strength;
+        public int GetAgility() => Agility;
+        public int GetIntellect() => Intellect;
 
-        public HeroClass GetHeroClass()
-        {
-            return HeroClass;
-        }
+        // Secondary stats
+        public int GetCriticalStrike() => CriticalStrike;
+        public int GetHaste() => Haste;
+        public int GetMastery() => Mastery;
+
+        // Offense
+        public int GetMinMelee() => MinMelee;
+        public int GetMaxMelee() => MaxMelee;
+        public int GetSpellDamage() => SpellDamage;
+
+        // Defence
+        public int GetArmor() => Armor;
+        public int GetSpellResistance() => SpellResistance;
     }
 }
