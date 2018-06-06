@@ -1,19 +1,18 @@
 ﻿using RPG.Heroes.Abilities;
-using RPG.Heroes.Abilities.ShamanAbilities.Defensive;
-using RPG.Heroes.Abilities.ShamanAbilities.Offensive;
+using RPG.Heroes.Abilities.AssassinAbilities.Offensive;
 using System.Collections.Generic;
 
 namespace RPG.Heroes
 {
-    public class Shaman : Character
+    public class Assassin : Character
     {
         private Dictionary<string, IAbility> Abilities;
 
-        public Shaman(string name) : base(name)
+        public Assassin(string name) : base(name)
         {
             // Basic
             name = Name;
-            HeroClass = HeroClass.Shaman;
+            HeroClass = HeroClass.Assassin;
 
             // Stats
             Stamina = 11;
@@ -22,19 +21,19 @@ namespace RPG.Heroes
             Intellect = 12;
 
             // Offense
-            MinMelee = 2;
-            MaxMelee = 5;
-            SpellDamage = 5;
+            MinMelee = 1;
+            MaxMelee = 7;
+            SpellDamage = 0;
 
             // Defence
             Armor = 7;
-            SpellResistance = 5;
+            SpellResistance = 4;
 
             // Abilities
             Abilities = new Dictionary<string, IAbility>()
             {
-                { "Magma Blast", new MagmaBlast() },
-                { "Chant of Rain", new ChantOfRain() }
+                { "Stab", new Stab() },
+                { "Venom Strike", new VenomStrike() }
             };
         }
     }

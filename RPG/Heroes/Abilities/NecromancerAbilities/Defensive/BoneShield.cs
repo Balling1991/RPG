@@ -1,15 +1,20 @@
-﻿namespace RPG.Heroes.Abilities.MageAbilities.Defensive
+﻿namespace RPG.Heroes.Abilities.NecromancerAbilities.Defensive
 {
-    public class ManaShield : DefensiveSpellAbility
+    public class BoneShield : DefensiveSpellAbility
     {
-        private const int AvailabilityLevel = 6;
+        private const int AvailabilityLevel = 10;
 
-        public ManaShield()
+        public BoneShield()
         {
             BaseArmor = 5;
             BaseResistance = 15;
             BaseHealing = 0;
-            ManaCost = 30;
+            ManaCost = 18;
+        }
+
+        public int CalculateArmor(int intellect)
+        {
+            return BaseArmor + (intellect / 2);
         }
 
         public int CalculateResistance(int intellect)

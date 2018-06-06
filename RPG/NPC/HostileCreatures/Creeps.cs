@@ -1,4 +1,4 @@
-﻿namespace RPG.NPC
+﻿namespace RPG.NPC.HostileCreatures
 {
     public enum Creeps
     {

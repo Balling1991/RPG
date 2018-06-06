@@ -1,4 +1,4 @@
-﻿namespace RPG.Heroes.Abilities.MageAbilities
+﻿namespace RPG.Heroes.Abilities
 {
     public interface IAbility
     {

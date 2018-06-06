@@ -37,7 +37,7 @@ namespace RPG.GameFlow
                 case "2":
                     return new Priest(name);
                 case "3":
-                    return new Rogue(name);
+                    return new Assassin(name);
                 case "4":
                     return new Shaman(name);
                 case "5":
@@ -87,10 +87,15 @@ namespace RPG.GameFlow
                 Console.Clear();
             }
 
-            foreach (Character character in CharacterList)
+            if(CharacterList.Any())
             {
                 Console.WriteLine("--- YOUR CHARACTERS ---");
-                Console.WriteLine(character.Name + " - " + character.GetHeroClass() + " - lvl " + character.GetLevel());
+            }
+
+            foreach (Character character in CharacterList)
+
+            {
+                Console.WriteLine(characterCount + ": " + character.Name + " - " + character.GetHeroClass() + " - lvl " + character.GetLevel());
                 characterCount++;
             }
             Console.WriteLine("\nGo back...");

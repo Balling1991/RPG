@@ -1,10 +1,10 @@
-﻿namespace RPG.Heroes.Abilities.MageAbilities.Offensive
+﻿namespace RPG.Heroes.Abilities.NecromancerAbilities.Offensive
 {
-    public class IgniteDOT : OffensiveSpellAbility
+    public class RotDOT : OffensiveSpellAbility
     {
         private const int AvailabilityLevel = 4;
 
-        public IgniteDOT()
+        public RotDOT()
         {
             BaseDamage = 2;
             ManaCost = 6;

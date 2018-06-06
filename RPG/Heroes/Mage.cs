@@ -1,4 +1,4 @@
-﻿using RPG.Heroes.Abilities.MageAbilities;
+﻿using RPG.Heroes.Abilities;
 using RPG.Heroes.Abilities.MageAbilities.Defensive;
 using RPG.Heroes.Abilities.MageAbilities.Offensive;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace RPG.Heroes
 {
     public class Mage : Character
     {
-        private List<IAbility> Abilities;
+        private Dictionary<string, IAbility> Abilities;
 
         public Mage(string name) : base(name)
         {
@@ -30,12 +30,12 @@ namespace RPG.Heroes
             Armor = 5;
             SpellResistance = 8;
 
-            // Offensive Abilities
-            Abilities = new List<IAbility>()
+            // Abilities
+            Abilities = new Dictionary<string, IAbility>()
             {
-                new Fireball(),
-                new IgniteDot(),
-                new ManaShield()
+                { "Fireball", new Fireball() },
+                { "Ignite", new IgniteDOT() },
+                { "Mana Shield", new ManaShield() }
             };
         }
     }

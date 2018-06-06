@@ -13,4 +13,10 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Heroes\Abilities\AssassinAbilities\Defensive\" />
+    <Folder Include="Heroes\Abilities\HunterAbilities\Defensive\" />
+    <Folder Include="Heroes\Abilities\WarriorAbilities\Defensive\" />
+  </ItemGroup>
+
 </Project>
