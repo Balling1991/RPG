@@ -7,7 +7,17 @@ namespace RPG.GameFlow
 {
     public class CharacterFlow
     {
-        public static Character CreateNewCharacter()
+        private readonly IGame _game;
+        private readonly List<Character> _characterList;
+        public bool _isPlaying;
+
+        public CharacterFlow(IGame game, List<Character> characterList)
+        {
+            _game = game ?? throw new ArgumentNullException(nameof(game));
+            _characterList = characterList ?? throw new ArgumentNullException(nameof(characterList));
+        }
+
+        public Character CreateNewCharacter()
         {
             Console.Write("\nPlease enter the name of your character: ");
             var name = Console.ReadLine();
@@ -68,7 +78,7 @@ namespace RPG.GameFlow
             Console.WriteLine("b - Cancel");
         }
 
-        public static List<Character> SaveNewCharacter(Character character, List<Character> characterList)
+        public List<Character> SaveNewCharacter(Character character, List<Character> characterList)
         {
             if(character != null)
             {
@@ -77,7 +87,7 @@ namespace RPG.GameFlow
             return characterList;
         }
 
-        public static void ShowCharacterList(List<Character> characterList)
+        public void ShowCharacterList(List<Character> characterList)
         {
             if (!characterList.Any())
             {
@@ -111,7 +121,7 @@ namespace RPG.GameFlow
             }
         }
 
-        private static void ShowCharacterDetails(Character character)
+        public void ShowCharacterDetails(Character character)
         {
             Console.Clear();
             Console.WriteLine($"\n!---------- CHARACTER ----------");
@@ -137,9 +147,21 @@ namespace RPG.GameFlow
             Console.WriteLine($"\n|--- DEFENSE:");
             Console.WriteLine($"|---    Armor:            {character.GetCriticalStrike()}");
             Console.WriteLine($"|---    Spell resistance: {character.GetHaste()}");
+
+            Console.WriteLine($"\n\nType 'P' if you wanna play this character!");
+
             Console.WriteLine("\nGo back...");
-            Console.ReadKey();
-            Console.Clear();
+            var characterChoice = Console.ReadKey().KeyChar.ToString();
+
+            if (characterChoice == "P" || characterChoice == "p")
+            {
+                GameFlow gameFlow = new GameFlow(_game, character);
+                gameFlow.GameMenu();
+                Console.Clear();
+            } else {
+                Console.Clear();
+                ShowCharacterList(_characterList);
+            }
         }
     }
 }

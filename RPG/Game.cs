@@ -4,35 +4,49 @@ using System.Collections.Generic;
 
 namespace RPG
 {
-    public class Game
+    public class Game : IGame
     {
-        public bool IsPlaying;
-        public string MainMenuChoice;
-        public bool IsCharacterPicked;
+        public bool _isPlaying;
         public List<Character> CharacterList;
+        public CharacterFlow CharacterFlow;
 
         public Game()
         {
-            IsPlaying = true;
+            _isPlaying = true;
             CharacterList = new List<Character>();
+            CharacterFlow = new CharacterFlow(this, CharacterList);
+        }
+
+        public bool IsPlaying()
+        {
+            return _isPlaying;
+        }
+
+        public void SetIsPLaying(bool isPlaying)
+        {
+            _isPlaying = isPlaying;
         }
 
         public void MainMenu()
         {
             Console.WriteLine("\n** MAIN MENU **");
-            Console.WriteLine("0: Quit");
+            Console.WriteLine("\n0: Quit");
             Console.WriteLine("1: Create new character");
             Console.WriteLine("2: Show characters");
             Console.Write("\nChoice: ");
 
-            MainMenuChoice = Console.ReadKey().KeyChar.ToString();
+            MainMenuChoices(Console.ReadKey().KeyChar.ToString());
 
+        }
+
+        public void MainMenuChoices(string choice)
+        {
             Console.Clear();
 
-            switch(MainMenuChoice)
+            switch (choice)
             {
                 case "0":
-                    IsPlaying = false;
+                    SetIsPLaying(false);
                     break;
                 case "1":
                     var newCharacter = CharacterFlow.CreateNewCharacter();

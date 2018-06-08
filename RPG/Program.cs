@@ -6,7 +6,7 @@
         {
             Game game = new Game();
 
-            while (game.IsPlaying)
+            while (game._isPlaying)
             {
                 game.MainMenu();
             }
