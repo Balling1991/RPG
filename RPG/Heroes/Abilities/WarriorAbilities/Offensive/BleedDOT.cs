@@ -2,6 +2,7 @@
 {
     public class BleedDOT : OffensiveMeleeAbility
     {
+        private const string AbilityName = "Bleed";
         private const int AvailabilityLevel = 4;
 
         public BleedDOT()
@@ -13,6 +14,11 @@
         public int CalculateDamage(int strength)
         {
             return BaseDamage + (strength / 3);
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

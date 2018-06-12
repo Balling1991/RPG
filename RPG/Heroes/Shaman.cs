@@ -7,8 +7,6 @@ namespace RPG.Heroes
 {
     public class Shaman : Character
     {
-        private Dictionary<string, IAbility> Abilities;
-
         public Shaman(string name) : base(name)
         {
             // Basic

@@ -2,6 +2,7 @@
 {
     public class BoneShield : DefensiveSpellAbility
     {
+        private const string AbilityName = "Bone Shield";
         private const int AvailabilityLevel = 10;
 
         public BoneShield()
@@ -20,6 +21,11 @@
         public int CalculateResistance(int intellect)
         {
             return BaseResistance + intellect;
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

@@ -7,8 +7,6 @@ namespace RPG.Heroes
 {
     public class Necromancer : Character
     {
-        private Dictionary<string, IAbility> Abilities;
-
         public Necromancer(string name) : base(name)
         {
             // Basic

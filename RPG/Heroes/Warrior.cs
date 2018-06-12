@@ -6,8 +6,6 @@ namespace RPG.Heroes
 {
     public class Warrior : Character
     {
-        private Dictionary<string, IAbility> Abilities;
-
         public Warrior(string name) : base(name)
         {
             // Basic

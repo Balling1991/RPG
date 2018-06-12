@@ -1,4 +1,7 @@
-﻿namespace RPG
+﻿using RPG.Heroes.Abilities;
+using System.Collections.Generic;
+
+namespace RPG
 {
     public abstract class Character
     {
@@ -30,6 +33,9 @@
         // Defence
         protected int Armor { get; set; }
         protected int SpellResistance { get; set; }
+
+        // Abilities
+        protected Dictionary<string, IAbility> Abilities { get; set; }
 
         public Character(string name)
         {
@@ -76,5 +82,9 @@
         // Defence
         public int GetArmor() => Armor;
         public int GetSpellResistance() => SpellResistance;
+
+        // Abilities
+        public Dictionary<string, IAbility> GetAbilities() => Abilities;
+        public IAbility GetAbility(string ability) => Abilities[ability];
     }
 }

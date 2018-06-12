@@ -2,6 +2,7 @@
 {
     public class LightAuraHOT : DefensiveSpellAbility
     {
+        private const string AbilityName = "Light Aura";
         private const int AvailabilityLevel = 10;
 
         public LightAuraHOT()
@@ -20,6 +21,11 @@
         public int CalculateHealing(int intellect)
         {
             return BaseHealing + (intellect / 2);
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

@@ -2,6 +2,7 @@
 {
     public class IgniteDOT : OffensiveSpellAbility
     {
+        private const string AbilityName = "Ignite";
         private const int AvailabilityLevel = 4;
 
         public IgniteDOT()
@@ -13,6 +14,11 @@
         public int CalculateDamage(int intellect)
         {
             return BaseDamage + (intellect / 5);
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

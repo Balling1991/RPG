@@ -2,6 +2,7 @@
 {
     public class DarkPact : DefensiveSpellAbility
     {
+        private const string AbilityName = "Dark Pact";
         private const int AvailabilityLevel = 6;
 
         public DarkPact()
@@ -19,6 +20,11 @@
         public int CalculateResistance(int intellect)
         {
             return BaseResistance + (intellect / 3);
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

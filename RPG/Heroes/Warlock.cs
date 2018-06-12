@@ -7,8 +7,6 @@ namespace RPG.Heroes
 {
     public class Warlock : Character
     {
-        private Dictionary<string, IAbility> Abilities;
-
         public Warlock(string name) : base(name)
         {
             // Basic

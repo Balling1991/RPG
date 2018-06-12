@@ -2,6 +2,7 @@
 {
     public class ManaShield : DefensiveSpellAbility
     {
+        private const string AbilityName = "Mana Shield";
         private const int AvailabilityLevel = 6;
 
         public ManaShield()
@@ -15,6 +16,11 @@
         public int CalculateResistance(int intellect)
         {
             return BaseResistance + intellect;
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

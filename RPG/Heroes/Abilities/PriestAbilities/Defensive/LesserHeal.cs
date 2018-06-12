@@ -2,6 +2,7 @@
 {
     public class LesserHeal : DefensiveSpellAbility
     {
+        private const string AbilityName = "Lesser Heal";
         private const int AvailabilityLevel = 4;
 
         public LesserHeal()
@@ -15,6 +16,11 @@
         public int CalculateHealing(int intellect)
         {
             return BaseResistance + intellect;
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

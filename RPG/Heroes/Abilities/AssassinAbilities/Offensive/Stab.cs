@@ -2,6 +2,7 @@
 {
     public class Stab : OffensiveMeleeAbility
     {
+        private const string AbilityName = "Stab";
         private const int AvailabilityLevel = 1;
 
         public Stab()
@@ -13,6 +14,11 @@
         public int CalculateDamage(int agility)
         {
             return BaseDamage + agility;
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

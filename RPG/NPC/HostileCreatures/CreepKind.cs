@@ -1,6 +1,6 @@
 ﻿namespace RPG.NPC.HostileCreatures
 {
-    public enum Creeps
+    public enum CreepKind
     {
         Deer = 0,
         Tiger = 1,

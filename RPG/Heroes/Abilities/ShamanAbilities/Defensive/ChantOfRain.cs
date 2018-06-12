@@ -2,6 +2,7 @@
 {
     public class ChantOfRain : DefensiveSpellAbility
     {
+        private const string AbilityName = "Chant Of Rain";
         private const int AvailabilityLevel = 6;
 
         public ChantOfRain()
@@ -30,6 +31,11 @@
         public override int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
     }
 }

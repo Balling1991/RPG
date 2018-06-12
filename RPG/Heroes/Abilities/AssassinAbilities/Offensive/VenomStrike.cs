@@ -2,6 +2,7 @@
 {
     public class VenomStrike : OffensiveMeleeAbility
     {
+        private const string AbilityName = "Venom Strike";
         private const int AvailabilityLevel = 4;
 
         public VenomStrike()
@@ -13,6 +14,11 @@
         public int CalculateDamage(int agility, int strength)
         {
             return BaseDamage + agility + (strength / 5);
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

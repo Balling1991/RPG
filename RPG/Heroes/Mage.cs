@@ -7,8 +7,6 @@ namespace RPG.Heroes
 {
     public class Mage : Character
     {
-        private Dictionary<string, IAbility> Abilities;
-
         public Mage(string name) : base(name)
         {
             // Basic

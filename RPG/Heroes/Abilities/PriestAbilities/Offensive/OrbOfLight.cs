@@ -2,6 +2,7 @@
 {
     public class OrbOfLight : OffensiveSpellAbility
     {
+        private const string AbilityName = "Orb Of Light";
         private const int GetAvailablityLevel = 1;
 
         public OrbOfLight()
@@ -13,6 +14,11 @@
         public int CalculateDamage(int intellect)
         {
             return (int)(BaseDamage + (intellect * 1.5));
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()

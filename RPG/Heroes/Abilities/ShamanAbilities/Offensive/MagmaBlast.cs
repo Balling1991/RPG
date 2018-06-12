@@ -2,6 +2,7 @@
 {
     public class MagmaBlast : OffensiveSpellAbility
     {
+        private const string AbilityName = "Magma Blast";
         private const int AvailabilityLevel = 1;
 
         public MagmaBlast()
@@ -13,6 +14,11 @@
         public int CalculateDamage(int intellect, int agility)
         {
             return (BaseDamage + (intellect / 2) + (agility / 3));
+        }
+
+        public override string GetAbilityName()
+        {
+            return AbilityName;
         }
 
         public override int GetAvailabilityLevel()
