@@ -3,6 +3,7 @@
     public class Stab : OffensiveMeleeAbility
     {
         private const string AbilityName = "Stab";
+        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 1;
 
         public Stab()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

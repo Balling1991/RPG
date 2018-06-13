@@ -3,6 +3,7 @@
     public class IgniteDOT : OffensiveSpellAbility
     {
         private const string AbilityName = "Ignite";
+        private const AbilityType Type = AbilityType.OffensiveSpell;
         private const int AvailabilityLevel = 4;
 
         public IgniteDOT()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

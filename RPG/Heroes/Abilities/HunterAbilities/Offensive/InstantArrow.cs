@@ -3,6 +3,7 @@
     public class InstantArrow : OffensiveMeleeAbility
     {
         private const string AbilityName = "Instant Arrow";
+        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 3;
 
         public InstantArrow()
@@ -18,7 +19,12 @@
 
         public override string GetAbilityName()
         {
-            throw new System.NotImplementedException();
+            return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

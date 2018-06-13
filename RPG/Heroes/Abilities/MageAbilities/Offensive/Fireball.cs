@@ -3,6 +3,7 @@
     public class Fireball : OffensiveSpellAbility
     {
         private const string AbilityName = "Fireball";
+        private const AbilityType Type = AbilityType.OffensiveSpell;
         private const int AvailabilityLevel = 1;
 
         public Fireball()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

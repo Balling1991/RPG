@@ -3,6 +3,7 @@
     public class DarkPact : DefensiveSpellAbility
     {
         private const string AbilityName = "Dark Pact";
+        private const AbilityType Type = AbilityType.DefensiveSpell;
         private const int AvailabilityLevel = 6;
 
         public DarkPact()
@@ -25,6 +26,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

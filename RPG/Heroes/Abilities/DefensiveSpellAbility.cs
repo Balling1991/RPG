@@ -8,6 +8,9 @@
         protected int ManaCost { get; set; }
 
         public abstract string GetAbilityName();
+
+        public abstract AbilityType GetAbilityType();
+
         public abstract int GetAvailabilityLevel();
     }
 }

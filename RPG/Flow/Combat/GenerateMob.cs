@@ -2,9 +2,9 @@
 
 namespace RPG.Flow.Combat
 {
-    public class GenerateRandomMob
+    public class GenerateMob
     {
-        public Creep GetRandomMob()
+        public Creep GenerateRandomMob()
         {
             return null;
         }

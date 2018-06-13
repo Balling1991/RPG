@@ -3,6 +3,7 @@
     public class VenomStrike : OffensiveMeleeAbility
     {
         private const string AbilityName = "Venom Strike";
+        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 4;
 
         public VenomStrike()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

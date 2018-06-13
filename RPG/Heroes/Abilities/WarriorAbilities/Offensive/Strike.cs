@@ -3,6 +3,7 @@
     public class Strike : OffensiveMeleeAbility
     {
         private const string AbilityName = "Strike";
+        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 1;
 
         public Strike()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

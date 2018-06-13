@@ -3,6 +3,7 @@
     public class NetherBolt : OffensiveSpellAbility
     {
         private const string AbilityName = "Netherbolt";
+        private const AbilityType Type = AbilityType.OffensiveSpell;
         private const int AvailabilityLevel = 1;
 
         public NetherBolt()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

@@ -3,6 +3,7 @@
     public class BoneShield : DefensiveSpellAbility
     {
         private const string AbilityName = "Bone Shield";
+        private const AbilityType Type = AbilityType.DefensiveSpell;
         private const int AvailabilityLevel = 10;
 
         public BoneShield()
@@ -26,6 +27,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

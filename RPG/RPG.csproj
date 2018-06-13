@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Combat\" />
     <Folder Include="Heroes\Abilities\AssassinAbilities\Defensive\" />
     <Folder Include="Heroes\Abilities\HunterAbilities\Defensive\" />
     <Folder Include="Heroes\Abilities\WarriorAbilities\Defensive\" />

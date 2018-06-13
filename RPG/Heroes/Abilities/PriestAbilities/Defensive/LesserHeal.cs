@@ -3,6 +3,7 @@
     public class LesserHeal : DefensiveSpellAbility
     {
         private const string AbilityName = "Lesser Heal";
+        private const AbilityType Type = AbilityType.DefensiveSpell;
         private const int AvailabilityLevel = 4;
 
         public LesserHeal()
@@ -21,6 +22,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

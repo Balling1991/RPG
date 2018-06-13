@@ -3,6 +3,7 @@
     public class OrbOfLight : OffensiveSpellAbility
     {
         private const string AbilityName = "Orb Of Light";
+        private const AbilityType Type = AbilityType.OffensiveSpell;
         private const int GetAvailablityLevel = 1;
 
         public OrbOfLight()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

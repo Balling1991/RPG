@@ -3,6 +3,7 @@
     public class SummonSkeletonDOT : OffensiveSpellAbility
     {
         private const string AbilityName = "Summon Skeleton";
+        private const AbilityType Type = AbilityType.OffensiveSpell;
         private const int AvailabilityLevel = 1;
 
         public SummonSkeletonDOT()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

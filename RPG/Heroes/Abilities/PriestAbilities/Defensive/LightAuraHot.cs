@@ -3,6 +3,7 @@
     public class LightAuraHOT : DefensiveSpellAbility
     {
         private const string AbilityName = "Light Aura";
+        private const AbilityType Type = AbilityType.DefensiveSpell;
         private const int AvailabilityLevel = 10;
 
         public LightAuraHOT()
@@ -26,6 +27,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

@@ -3,6 +3,7 @@
     public class BleedDOT : OffensiveMeleeAbility
     {
         private const string AbilityName = "Bleed";
+        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 4;
 
         public BleedDOT()
@@ -19,6 +20,11 @@
         public override string GetAbilityName()
         {
             return AbilityName;
+        }
+
+        public override AbilityType GetAbilityType()
+        {
+            return Type;
         }
 
         public override int GetAvailabilityLevel()

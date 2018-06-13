@@ -73,8 +73,7 @@ namespace RPG.Flow
                     FightRandomMob();
                     break;
                 case "2":
-                    var ability =_character.GetAbility("Bleed");
-                    Console.WriteLine($"You chose {ability.GetAbilityName()}");
+                    //_character.ExecuteAbility("Bleed");
                     Console.ReadKey();
                     break;
                 default:
