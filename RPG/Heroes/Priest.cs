@@ -10,30 +10,30 @@ namespace RPG.Heroes
         public Priest(string name) : base(name)
         {
             // Basic
-            name = Name;
-            HeroClass = HeroClass.Priest;
+            Stats.Name = name;
+            Stats.HeroClass = HeroClass.Priest;
 
             // Stats
-            Stamina = 11;
-            Strength = 8;
-            Agility = 10;
-            Intellect = 12;
+            Attributes.Stamina = 11;
+            Attributes.Strength = 8;
+            Attributes.Agility = 10;
+            Attributes.Intellect = 12;
 
             // Offense
-            MinMelee = 1;
-            MaxMelee = 2;
-            SpellDamage = 6;
+            OffensiveStats.MinMelee = 1;
+            OffensiveStats.MaxMelee = 2;
+            OffensiveStats.SpellDamage = 6;
 
             // Defence
-            Armor = 5;
-            SpellResistance = 5;
+            DefensiveStats.Armor = 5;
+            DefensiveStats.SpellResistance = 5;
 
             // Abilities
             Abilities = new Dictionary<string, IAbility>()
             {
+                { "Orb of Light", new OrbOfLight() },
                 { "Lesser Heal", new LesserHeal() },
-                { "Light Aura", new LightAuraHOT() },
-                { "Orb of Light", new OrbOfLight() }
+                { "Light Aura", new LightAuraHOT() }
             };
         }
     }

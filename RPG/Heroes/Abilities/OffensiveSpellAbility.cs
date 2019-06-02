@@ -10,5 +10,10 @@
         public abstract AbilityType GetAbilityType();
 
         public abstract int GetAvailabilityLevel();
+
+        public int GetDamage()
+        {
+            return 0;
+        }
     }
 }

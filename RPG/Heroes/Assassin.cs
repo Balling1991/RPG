@@ -9,23 +9,23 @@ namespace RPG.Heroes
         public Assassin(string name) : base(name)
         {
             // Basic
-            name = Name;
-            HeroClass = HeroClass.Assassin;
+            Stats.Name = name;
+            Stats.HeroClass = HeroClass.Assassin;
 
             // Stats
-            Stamina = 11;
-            Strength = 8;
-            Agility = 10;
-            Intellect = 12;
+            Attributes.Stamina = 10;
+            Attributes.Strength = 8;
+            Attributes.Agility = 11;
+            Attributes.Intellect = 7;
 
             // Offense
-            MinMelee = 1;
-            MaxMelee = 7;
-            SpellDamage = 0;
+            OffensiveStats.MinMelee = 2;
+            OffensiveStats.MaxMelee = 7;
+            OffensiveStats.SpellDamage = 0;
 
             // Defence
-            Armor = 7;
-            SpellResistance = 4;
+            DefensiveStats.Armor = 7;
+            DefensiveStats.SpellResistance = 4;
 
             // Abilities
             Abilities = new Dictionary<string, IAbility>()

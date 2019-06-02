@@ -10,23 +10,23 @@ namespace RPG.Heroes
         public Mage(string name) : base(name)
         {
             // Basic
-            name = Name;
-            HeroClass = HeroClass.Mage;
+            Stats.Name = name;
+            Stats.HeroClass = HeroClass.Mage;
 
             // Stats
-            Stamina = 11;
-            Strength = 8;
-            Agility = 10;
-            Intellect = 12;
+            Attributes.Stamina = 8;
+            Attributes.Strength = 8;
+            Attributes.Agility = 7;
+            Attributes.Intellect = 12;
 
             // Offense
-            MinMelee = 1;
-            MaxMelee = 2;
-            SpellDamage = 8;
+            OffensiveStats.MinMelee = 1;
+            OffensiveStats.MaxMelee = 2;
+            OffensiveStats.SpellDamage = 8;
 
             // Defence
-            Armor = 5;
-            SpellResistance = 8;
+            DefensiveStats.Armor = 5;
+            DefensiveStats.SpellResistance = 8;
 
             // Abilities
             Abilities = new Dictionary<string, IAbility>()

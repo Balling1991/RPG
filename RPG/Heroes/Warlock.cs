@@ -10,23 +10,23 @@ namespace RPG.Heroes
         public Warlock(string name) : base(name)
         {
             // Basic
-            name = Name;
-            HeroClass = HeroClass.Warlock;
+            Stats.Name = name;
+            Stats.HeroClass = HeroClass.Warlock;
 
             // Stats
-            Stamina = 11;
-            Strength = 8;
-            Agility = 10;
-            Intellect = 12;
+            Attributes.Stamina = 11;
+            Attributes.Strength = 8;
+            Attributes.Agility = 10;
+            Attributes.Intellect = 12;
 
             // Offense
-            MinMelee = 1;
-            MaxMelee = 2;
-            SpellDamage = 10;
+            OffensiveStats.MinMelee = 1;
+            OffensiveStats.MaxMelee = 2;
+            OffensiveStats.SpellDamage = 10;
 
             // Defense
-            Armor = 6;
-            SpellResistance = 6;
+            DefensiveStats.Armor = 6;
+            DefensiveStats.SpellResistance = 6;
 
             // Abilities
             Abilities = new Dictionary<string, IAbility>()

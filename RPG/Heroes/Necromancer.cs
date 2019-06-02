@@ -10,23 +10,23 @@ namespace RPG.Heroes
         public Necromancer(string name) : base(name)
         {
             // Basic
-            name = Name;
-            HeroClass = HeroClass.Necromancer;
+            Stats.Name = name;
+            Stats.HeroClass = HeroClass.Necromancer;
 
             // Stats
-            Stamina = 11;
-            Strength = 8;
-            Agility = 10;
-            Intellect = 12;
+            Attributes.Stamina = 11;
+            Attributes.Strength = 8;
+            Attributes.Agility = 10;
+            Attributes.Intellect = 12;
 
             // Offense
-            MinMelee = 1;
-            MaxMelee = 3;
-            SpellDamage = 6;
+            OffensiveStats.MinMelee = 1;
+            OffensiveStats.MaxMelee = 3;
+            OffensiveStats.SpellDamage = 6;
 
             // Defence
-            Armor = 6;
-            SpellResistance = 7;
+            DefensiveStats.Armor = 6;
+            DefensiveStats.SpellResistance = 7;
 
             // Abilities
             Abilities = new Dictionary<string, IAbility>()

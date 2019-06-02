@@ -14,7 +14,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Combat\" />
+    <Compile Remove="Combat\**" />
+    <EmbeddedResource Remove="Combat\**" />
+    <None Remove="Combat\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Heroes\Abilities\AssassinAbilities\Defensive\" />
     <Folder Include="Heroes\Abilities\HunterAbilities\Defensive\" />
     <Folder Include="Heroes\Abilities\WarriorAbilities\Defensive\" />
@@ -38,7 +43,7 @@
     <Folder Include="Items\Weapons\MeleeWeapons\Polearms\" />
     <Folder Include="Items\Weapons\MeleeWeapons\Swords\" />
     <Folder Include="Items\Weapons\RangedWeapons\Bows\" />
-    <Folder Include="Items\Wrists\" />
+    <Folder Include="Items\Wrist\" />
   </ItemGroup>
 
   <ItemGroup>

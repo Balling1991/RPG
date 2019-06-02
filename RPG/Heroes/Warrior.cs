@@ -9,30 +9,45 @@ namespace RPG.Heroes
         public Warrior(string name) : base(name)
         {
             // Basic
-            name = Name;
-            HeroClass = HeroClass.Warrior;
+            Stats.Name = name;
+            Stats.HeroClass = HeroClass.Warrior;
 
             // Stats
-            Stamina = 11;
-            Strength = 8;
-            Agility = 10;
-            Intellect = 12;
+            Attributes.Stamina = 13;
+            Attributes.Strength = 8;
+            Attributes.Agility = 10;
+            Attributes.Intellect = 5;
 
             // Offense
-            MinMelee = 2;
-            MaxMelee = 6;
-            SpellDamage = 0;
+            OffensiveStats.MinMelee = 3;
+            OffensiveStats.MaxMelee = 6;
+            OffensiveStats.SpellDamage = 0;
 
-            // Defence
-            Armor = 10;
-            SpellResistance = 3;
+            // Defense
+            DefensiveStats.Armor = 10;
+            DefensiveStats.SpellResistance = 3;
+
+            // Resources
+            Stats.MaxHP = Attributes.Stamina * 10;
+            Stats.HP = Stats.MaxHP;
+            BaseRage = 0;
+            CurrentRage = 0;
 
             // Abilities
             Abilities = new Dictionary<string, IAbility>()
             {
+                { "Attack", new Attack(OffensiveStats.MinMelee, OffensiveStats.MaxMelee) },
                 { "Strike", new Strike() },
                 { "Bleed",  new BleedDOT() }
             };
         }
+
+        //public int CalculaterageRegain()
+        //{
+
+        //}
+
+        public int BaseRage { get; private set; }
+        public int CurrentRage { get; private set; }
     }
 }

@@ -10,23 +10,23 @@ namespace RPG.Heroes
         public Shaman(string name) : base(name)
         {
             // Basic
-            name = Name;
-            HeroClass = HeroClass.Shaman;
+            Stats.Name = name;
+            Stats.HeroClass = HeroClass.Shaman;
 
             // Stats
-            Stamina = 11;
-            Strength = 8;
-            Agility = 10;
-            Intellect = 12;
+            Attributes.Stamina = 11;
+            Attributes.Strength = 8;
+            Attributes.Agility = 10;
+            Attributes.Intellect = 12;
 
             // Offense
-            MinMelee = 2;
-            MaxMelee = 5;
-            SpellDamage = 5;
+            OffensiveStats.MinMelee = 2;
+            OffensiveStats.MaxMelee = 5;
+            OffensiveStats.SpellDamage = 5;
 
             // Defence
-            Armor = 7;
-            SpellResistance = 5;
+            DefensiveStats.Armor = 7;
+            DefensiveStats.SpellResistance = 5;
 
             // Abilities
             Abilities = new Dictionary<string, IAbility>()

@@ -31,5 +31,10 @@
         {
             return AvailabilityLevel;
         }
+
+        public override int GetDamage()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

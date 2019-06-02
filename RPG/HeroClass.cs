@@ -9,6 +9,7 @@
         Shaman = 4,
         Warlock = 5,
         Warrior = 6,
-        Hunter = 7
+        Hunter = 7,
+        Paladin = 8
     }
 }

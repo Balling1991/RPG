@@ -1,20 +1,20 @@
-﻿namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
+﻿using System;
+
+namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
 {
-    public class Strike : OffensiveMeleeAbility
+    public class Attack : OffensiveMeleeAbility
     {
-        private const string AbilityName = "Strike";
+        private const string AbilityName = "Attack";
         private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 1;
 
-        public Strike()
-        {
-            BaseDamage = 5;
-            RageCost = 20;
-        }
+        private readonly int MinMelee;
+        private readonly int MaxMelee;
 
-        public int CalculateDamage(int strength)
+        public Attack(int minMelee, int maxMelee)
         {
-            return BaseDamage + strength;
+            MinMelee = minMelee;
+            MaxMelee = maxMelee;
         }
 
         public override string GetAbilityName()
@@ -34,7 +34,8 @@
 
         public override int GetDamage()
         {
-            throw new System.NotImplementedException();
+            Random random = new Random();
+            return random.Next(MinMelee, MaxMelee);
         }
     }
 }

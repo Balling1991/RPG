@@ -1,16 +1,25 @@
-﻿using System;
+﻿using RPG.Flow.Combat;
+using System;
 
 namespace RPG.Flow
 {
     public class GameFlow
     {
         private readonly IGame _game;
-        private readonly Character _character;
-        public bool _isPlaying;
+        private readonly CharacterFlow _charFlow;
+        private Character _character;
+        private CombatFlow _combat;
 
-        public GameFlow(IGame game, Character character)
+        public GameFlow(IGame game, CharacterFlow charFlow, Character character)
         {
             _game = game ?? throw new ArgumentNullException(nameof(game));
+            _charFlow = charFlow ?? throw new ArgumentNullException(nameof(charFlow));
+            _character = character ?? throw new ArgumentNullException(nameof(character));
+            _combat = new CombatFlow(this, character);
+        }
+
+        public void SetCharacter(Character character)
+        {
             _character = character ?? throw new ArgumentNullException(nameof(character));
         }
 
@@ -22,8 +31,8 @@ namespace RPG.Flow
             Console.WriteLine("\n0: Quit");
             Console.WriteLine("1: Character Overview");
             Console.WriteLine("2: Inventory");
-            Console.WriteLine("3: Shop");
-            Console.WriteLine("4: Battle");
+            Console.WriteLine("3: Buy/sell");
+            Console.WriteLine("4: Combat");
             Console.Write("\nChoice: ");
 
             GameMenuChoice = Console.ReadKey().KeyChar.ToString();
@@ -36,13 +45,15 @@ namespace RPG.Flow
                     _game.SetIsPLaying(false);
                     break;
                 case "1":
+                    _charFlow.ShowCharacterDetails(_character);
                     break;
                 case "2":
                     break;
                 case "3":
                     break;
                 case "4":
-                    Fight();
+                    _combat.Fight();
+                    GameMenu();
                     break;
                 default:
                     Console.WriteLine("\nPlease make a choice from the menu");
@@ -50,41 +61,6 @@ namespace RPG.Flow
             }
         }
 
-        public void Fight()
-        {
-            string BattleMenuChoice;
-            Console.Clear();
-            Console.WriteLine("\n** FIGHT MENU **");
-            Console.WriteLine("\n0: Quit");
-            Console.WriteLine("1: Fight random mob");
-            Console.WriteLine("2: Test ability get");
-            Console.Write("\nChoice: ");
-
-            BattleMenuChoice = Console.ReadKey().KeyChar.ToString();
-
-            Console.Clear();
-
-            switch (BattleMenuChoice)
-            {
-                case "0":
-                    _game.SetIsPLaying(false);
-                    break;
-                case "1":
-                    FightRandomMob();
-                    break;
-                case "2":
-                    //_character.ExecuteAbility("Bleed");
-                    Console.ReadKey();
-                    break;
-                default:
-                    Console.WriteLine("\nPlease make a choice from the menu");
-                    break;
-            }
-        }
-
-        public void FightRandomMob()
-        {
-
-        }
+        
     }
 }

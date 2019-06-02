@@ -9,6 +9,7 @@ namespace RPG.Flow
     {
         private readonly IGame _game;
         private readonly List<Character> _characterList;
+        private GameFlow _gameFlow;
         public bool _isPlaying;
 
         public CharacterFlow(IGame game, List<Character> characterList)
@@ -99,15 +100,15 @@ namespace RPG.Flow
             if(characterList.Any())
             {
                 Console.WriteLine("--- YOUR CHARACTERS ---");
+                Console.WriteLine();
             }
 
             for(int i = 0; i < characterList.Count; i++)
             {
-                Console.WriteLine(i + ": " + characterList[i].Name + " - " + characterList[i].GetHeroClass() + " - lvl " + characterList[i].GetLevel());
+                Console.WriteLine(i + ": " + characterList[i].Stats.Name + " - " + characterList[i].GetHeroClass() + " - lvl " + characterList[i].GetLevel());
             }
 
-            Console.WriteLine("\n\nPick the character you want to inspect:");
-            Console.WriteLine("\nGo back...");
+            Console.WriteLine("\n\nGo back... (space)");
             Console.Write("\nCharacter nr: ");
 
             var characterFromList = Console.ReadKey().KeyChar.ToString();
@@ -129,8 +130,8 @@ namespace RPG.Flow
             Console.WriteLine($"\n!---------- STATS ----------");
             Console.WriteLine($"\n|--- BASIC:");
             Console.WriteLine($"|---    Exp.:             {character.GetExp()}");
-            Console.WriteLine($"|---    Exp. to level up: {character.GetExpToNextLevel()}");
-            Console.WriteLine($"|---    HP:               {character.GetMaxHP()}");
+            Console.WriteLine($"|---    Req. exp to lvl:  {character.GetExpToNextLevel()}");
+            Console.WriteLine($"|---    HP:               {character.GetHP()}");
             Console.WriteLine($"\n|--- ATTRIBUTES:");
             Console.WriteLine($"|---    Stamina:          {character.GetStamina()}");
             Console.WriteLine($"|---    Strength:         {character.GetStrength()}");
@@ -141,12 +142,12 @@ namespace RPG.Flow
             Console.WriteLine($"|---    Haste:            {character.GetHaste()}");
             Console.WriteLine($"|---    Mastery:          {character.GetMastery()}");
             Console.WriteLine($"\n|--- OFFENSE:");
-            Console.WriteLine($"|---    Min. melee dmg:   {character.GetCriticalStrike()}");
-            Console.WriteLine($"|---    Max. melee dmg:   {character.GetHaste()}");
-            Console.WriteLine($"|---    Spell damage:     {character.GetMastery()}");
+            Console.WriteLine($"|---    Min. melee dmg:   {character.GetMinMelee()}");
+            Console.WriteLine($"|---    Max. melee dmg:   {character.GetMaxMelee()}");
+            Console.WriteLine($"|---    Spell damage:     {character.GetSpellDamage()}");
             Console.WriteLine($"\n|--- DEFENSE:");
-            Console.WriteLine($"|---    Armor:            {character.GetCriticalStrike()}");
-            Console.WriteLine($"|---    Spell resistance: {character.GetHaste()}");
+            Console.WriteLine($"|---    Armor:            {character.GetArmor()}");
+            Console.WriteLine($"|---    Spell resistance: {character.GetSpellResistance()}");
 
             Console.WriteLine($"\n\nType 'P' if you wanna play this character!");
 
@@ -155,8 +156,20 @@ namespace RPG.Flow
 
             if (characterChoice == "P" || characterChoice == "p")
             {
-                GameFlow gameFlow = new GameFlow(_game, character);
-                gameFlow.GameMenu();
+                GameFlow gameFlow;
+
+                if (_gameFlow != null)
+                {
+                    _gameFlow.SetCharacter(character);
+                    _gameFlow.GameMenu();
+                }
+                else
+                {
+                    gameFlow = new GameFlow(_game, this, character);
+                    _gameFlow = gameFlow;
+                    _gameFlow.GameMenu();
+                }
+
                 Console.Clear();
             } else {
                 Console.Clear();
