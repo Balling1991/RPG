@@ -7,6 +7,9 @@ namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
         private const string AbilityName = "Attack";
         private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 1;
+        private const int BaseRageGain = 23;
+        private const int CritRageGain = 30;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Gainer;
 
         private readonly int MinMelee;
         private readonly int MaxMelee;
@@ -36,6 +39,14 @@ namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
         {
             Random random = new Random();
             return random.Next(MinMelee, MaxMelee);
+        }
+
+        public int GetBaseRageGain() {
+            return BaseRageGain;
+        }
+
+        public int GetCritRageGain() {
+            return CritRageGain;
         }
     }
 }

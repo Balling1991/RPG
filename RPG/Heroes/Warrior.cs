@@ -37,15 +37,38 @@ namespace RPG.Heroes
             Abilities = new Dictionary<string, IAbility>()
             {
                 { "Attack", new Attack(OffensiveStats.MinMelee, OffensiveStats.MaxMelee) },
-                { "Strike", new Strike() },
+                { "Strike", new Strike(OffensiveStats.MinMelee, OffensiveStats.MaxMelee) },
                 { "Bleed",  new BleedDOT() }
             };
         }
 
-        //public int CalculaterageRegain()
-        //{
+        public void SetRageGain(Attack meleeAttack, bool wasCrit)
+        {
+            int rageGain;
 
-        //}
+            if (wasCrit)
+                rageGain = meleeAttack.GetCritRageGain();   
+             else
+                rageGain = meleeAttack.GetBaseRageGain();
+            
+            if (75 < CurrentRage)
+                CurrentRage = 100;
+            else
+                CurrentRage += rageGain;   
+        }
+
+        public bool CanExecuteAbility(OffensiveMeleeAbility ability) {
+            if (CurrentRage < ability.GetRageCost()) {
+                return false;
+            }
+            return true;
+        }
+
+        public void SpendRage(OffensiveMeleeAbility ability) {
+            if (CanExecuteAbility(ability)) {
+                CurrentRage -= ability.GetRageCost();
+            }
+        }
 
         public int BaseRage { get; private set; }
         public int CurrentRage { get; private set; }

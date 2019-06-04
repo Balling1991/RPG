@@ -5,6 +5,7 @@
         private const string AbilityName = "Bleed";
         private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 4;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Spender;
 
         public BleedDOT()
         {

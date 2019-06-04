@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using RPG.Heroes.Abilities;
 
 namespace RPG.CharacterProps
 {
@@ -8,5 +6,6 @@ namespace RPG.CharacterProps
     {
         public bool IsCCed { get; set; }
         public int LatestDamageDone { get; set; }
+        public IAbility LatestAbilityUsed { get; set; }
     }
 }

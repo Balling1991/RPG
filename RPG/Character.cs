@@ -39,6 +39,8 @@ namespace RPG
             }
         }
 
+        public abstract void SetCharacterStateAfterRound();
+
         public void SetIsCCed(int rounds)
         {
             if(rounds > 0)
@@ -79,6 +81,12 @@ namespace RPG
 
             mob.HP = mobHp - damage;
             CharacterState.LatestDamageDone = damage;
+
+            if(CharacterState.CurrentRage > 75) {
+                CharacterState.CurrentRage = 100;
+            } else {
+                CharacterState.CurrentRage += 25;
+            }
 
             if (mob.HP < 0)
                 mob.HP = 0;
@@ -121,8 +129,16 @@ namespace RPG
         public void SetXP(int xpAwarded)
         {
             Stats.Exp += xpAwarded;
+            CheckIfLeveledUp();
+        }
 
-            if (Stats.Exp > Stats.ExpToNextLvl)
+        public void SetLatestAbilityUsed(IAbility ability) 
+        {
+            CharacterState.LatestAbilityUsed = ability;
+        }
+
+        private void CheckIfLeveledUp() {
+        if (Stats.Exp > Stats.ExpToNextLvl)
             {
                 Stats.Exp -= Stats.ExpToNextLvl;
                 Stats.Level++;
@@ -170,5 +186,6 @@ namespace RPG
 
         // State
         public int GetLatestDamageDone() => CharacterState.LatestDamageDone;
+        public int GetLatestAbilityUsed() => CharacterState.GetLatestAbilityUsed;
     }
 }

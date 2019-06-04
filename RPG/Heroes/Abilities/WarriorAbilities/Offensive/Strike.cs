@@ -5,9 +5,16 @@
         private const string AbilityName = "Strike";
         private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 1;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Gainer;
+        private int MinDmg;
+        private int MaxDmg;
+        private int BaseDamage;
+        private int RageCost;
 
-        public Strike()
+        public Strike(int minDmg, int maxDmg)
         {
+            MinDmg = minDmg;
+            MaxDmg = maxDmg;
             BaseDamage = 5;
             RageCost = 20;
         }
@@ -34,7 +41,18 @@
 
         public override int GetDamage()
         {
-            throw new System.NotImplementedException();
+            Random random = new Random();
+            int dmg = random.Next(MinDmg, MaxDmg);
+
+            return BaseDamage + dmg;
+        }
+
+        public override int GetRageCost() {
+            return RageCost;
+        }
+
+        public override AbilityResourceKind GetResourceKind() {
+            return ResourceKind;
         }
     }
 }

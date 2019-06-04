@@ -72,6 +72,7 @@ namespace RPG.Flow.Combat
             IAbility abilityToExecute;
             List<string> abilityList = new List<string>(_character.GetAbilities().Keys);
             Random random = new Random();
+            int rounds = 0;
 
             var playerTurn = random.Next(1, 2);
             mob.HP = mob.GetMaxHP();
@@ -80,6 +81,12 @@ namespace RPG.Flow.Combat
 
             while (_isFighting)
             {
+                bool roundCompleted = CheckCombatRound();
+
+                if(roundCompleted()) {
+                    rounds += 1;
+                }
+
                 if (playerTurn == 1) {
                     Console.Clear();
                     Console.WriteLine("\n** COMBAT MENU **");
@@ -232,6 +239,18 @@ namespace RPG.Flow.Combat
                 default:
                     return 0;
             }
+        }
+
+        private bool CheckCombatRound(bool playerHadATurn, bool mobHadATurn) {
+            if (playerHadATurn && mobHadATurn)
+                return true;
+            
+            return false;
+        }
+
+        private void UpdateCharacterResources()
+        {
+            var abilityUsed = _character.GetLatestAbilityUsed();
         }
     }
 }
