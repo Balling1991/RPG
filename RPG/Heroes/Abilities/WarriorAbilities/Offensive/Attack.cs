@@ -2,13 +2,13 @@
 
 namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
 {
-    public class Attack : OffensiveMeleeAbility
+    public class Attack : IOffensiveMeleeRageAbility
     {
         private const string AbilityName = "Attack";
-        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 1;
         private const int BaseRageGain = 23;
         private const int CritRageGain = 30;
+        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const AbilityResourceKind ResourceKind = AbilityResourceKind.Gainer;
 
         private readonly int MinMelee;
@@ -20,22 +20,22 @@ namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
             MaxMelee = maxMelee;
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
         }
 
-        public override int GetDamage()
+        public int GetDamage()
         {
             Random random = new Random();
             return random.Next(MinMelee, MaxMelee);
@@ -47,6 +47,23 @@ namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
 
         public int GetCritRageGain() {
             return CritRageGain;
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
+        }
+
+        public int GetRageGain(bool isCrit)
+        {
+            if(isCrit)
+                return CritRageGain;
+            return BaseRageGain;
+        }
+
+        public int GetRageCost()
+        {
+            return 0;
         }
     }
 }

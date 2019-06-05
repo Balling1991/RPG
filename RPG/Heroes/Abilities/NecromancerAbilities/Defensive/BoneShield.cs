@@ -1,17 +1,17 @@
 ﻿namespace RPG.Heroes.Abilities.NecromancerAbilities.Defensive
 {
-    public class BoneShield : DefensiveSpellAbility
+    public class BoneShield : IDefensiveSpellAbility
     {
         private const string AbilityName = "Bone Shield";
-        private const AbilityType Type = AbilityType.DefensiveSpell;
         private const int AvailabilityLevel = 10;
+        private const int BaseArmor = 5;
+        private const int BaseSpellResistance = 15;
+        private const int ManaCost = 18;
+        private const AbilityType Type = AbilityType.DefensiveSpell;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public BoneShield()
         {
-            BaseArmor = 5;
-            BaseResistance = 15;
-            BaseHealing = 0;
-            ManaCost = 18;
         }
 
         public int CalculateArmor(int intellect)
@@ -21,22 +21,32 @@
 
         public int CalculateResistance(int intellect)
         {
-            return BaseResistance + intellect;
+            return BaseSpellResistance + intellect;
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
+        }
+
+        public int GetManaCost()
+        {
+            return ManaCost;
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
         }
     }
 }

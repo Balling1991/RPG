@@ -42,7 +42,7 @@ namespace RPG.Flow
             switch (GameMenuChoice)
             {
                 case "0":
-                    _game.SetIsPLaying(false);
+                    _game.SetIsPlaying(false);
                     break;
                 case "1":
                     _charFlow.ShowCharacterDetails(_character);

@@ -1,22 +1,22 @@
-﻿namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
+﻿using System;
+
+namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
 {
-    public class Strike : OffensiveMeleeAbility
+    public class Strike : IOffensiveMeleeRageAbility
     {
         private const string AbilityName = "Strike";
-        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 1;
-        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Gainer;
-        private int MinDmg;
-        private int MaxDmg;
-        private int BaseDamage;
-        private int RageCost;
+        private const int BaseDamage = 5;
+        private const int RageCost = 20;
+        private const AbilityType Type = AbilityType.OffensiveMelee;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
+        private readonly int MinDmg;
+        private readonly int MaxDmg;
 
         public Strike(int minDmg, int maxDmg)
         {
             MinDmg = minDmg;
             MaxDmg = maxDmg;
-            BaseDamage = 5;
-            RageCost = 20;
         }
 
         public int CalculateDamage(int strength)
@@ -24,22 +24,22 @@
             return BaseDamage + strength;
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
         }
 
-        public override int GetDamage()
+        public int GetDamage()
         {
             Random random = new Random();
             int dmg = random.Next(MinDmg, MaxDmg);
@@ -47,11 +47,16 @@
             return BaseDamage + dmg;
         }
 
-        public override int GetRageCost() {
+        public int GetRageCost() {
             return RageCost;
         }
 
-        public override AbilityResourceKind GetResourceKind() {
+        public int GetRageGain(bool isCrit)
+        {
+            return 0;
+        }
+
+        public AbilityResourceKind GetResourceKind() {
             return ResourceKind;
         }
     }

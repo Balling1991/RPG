@@ -4,11 +4,12 @@ namespace RPG.NPC.HostileCreatures
 {
     public abstract class Mob
     {
+        // Basic stats
         protected MobKind CreepKind { get; set; }
         protected int Level { get; set; }
-        public int HP { get; set; }
+        public int HP { get; private set; }
         protected int MaxHP { get; set; }
-        public bool IsCCed { get; set; }
+        public bool IsCCed { get; private set; }
 
         // Combat
         protected int MinMelee { get; set; }
@@ -31,18 +32,6 @@ namespace RPG.NPC.HostileCreatures
             return character;
         }
 
-        public void SetIsCCed(int rounds)
-        {
-            if (rounds > 0)
-            {
-                IsCCed = true;
-            }
-            else
-            {
-                IsCCed = false;
-            }
-        }
-
         // Getters
         public MobKind GetCreepKind() => CreepKind;
         public int GetLevel() => Level;
@@ -51,6 +40,20 @@ namespace RPG.NPC.HostileCreatures
         public int GetMinMelee() => MinMelee;
         public int GetMaxMelee() => MaxMelee;
         public int GetLatestDamageDone() => LatestDamageDone;
+
+        // Setters
+        public void SetHp(int hp)
+        {
+            HP = hp;
+        }
+
+        public void SetIsCCed(int rounds)
+        {
+            if (rounds > 0)
+                IsCCed = true;
+            else
+                IsCCed = false;
+        }
 
     }
 }

@@ -3,6 +3,6 @@
     public interface IGame
     {
         bool IsPlaying();
-        void SetIsPLaying(bool isPlaying);
+        void SetIsPlaying(bool isPlaying);
     }
 }

@@ -1,17 +1,17 @@
 ﻿namespace RPG.Heroes.Abilities.PriestAbilities.Defensive
 {
-    public class LightAuraHOT : DefensiveSpellAbility
+    public class LightAuraHOT : IDefensiveSpellAbility
     {
         private const string AbilityName = "Light Aura";
-        private const AbilityType Type = AbilityType.DefensiveSpell;
         private const int AvailabilityLevel = 10;
+        private const int BaseArmor = 2;
+        private const int BaseHealing = 8;
+        private const int ManaCost = 45;
+        private const AbilityType Type = AbilityType.DefensiveSpell;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public LightAuraHOT()
         {
-            BaseArmor = 2;
-            BaseResistance = 0;
-            BaseHealing = 8;
-            ManaCost = 45;
         }
 
         public int CalculateArmor(int intellect)
@@ -24,19 +24,29 @@
             return BaseHealing + (intellect / 2);
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
+        }
+
+        public int GetManaCost()
+        {
+            return ManaCost;
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
         }
     }
 }

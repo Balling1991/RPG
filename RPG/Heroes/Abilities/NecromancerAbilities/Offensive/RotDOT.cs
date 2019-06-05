@@ -1,15 +1,16 @@
 ﻿namespace RPG.Heroes.Abilities.NecromancerAbilities.Offensive
 {
-    public class RotDOT : OffensiveSpellAbility
+    public class RotDOT : IOffensiveSpellAbility
     {
         private const string AbilityName = "Rot";
-        private const AbilityType Type = AbilityType.OffensiveSpell;
         private const int AvailabilityLevel = 4;
+        private const int BaseDamage = 2;
+        private const int ManaCost = 6;
+        private const AbilityType Type = AbilityType.OffensiveSpell;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public RotDOT()
         {
-            BaseDamage = 2;
-            ManaCost = 6;
         }
 
         public int CalculateDamage(int intellect)
@@ -17,19 +18,29 @@
             return BaseDamage + (intellect / 5);
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
+        }
+
+        public int GetManaCost()
+        {
+            return ManaCost;
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
         }
     }
 }

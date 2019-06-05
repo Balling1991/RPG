@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using RPG.Heroes.Abilities;
+using RPG.NPC.HostileCreatures;
+using System;
 
 namespace RPG.Heroes
 {
-    public class Paladin : Character
+    public class Paladin : MeleeCharacter
     {
         public Paladin(string name) : base(name)
         {
@@ -26,6 +26,21 @@ namespace RPG.Heroes
             // Defence
             DefensiveStats.Armor = 5;
             DefensiveStats.SpellResistance = 8;
+        }
+
+        public override Mob ExecuteDefensiveMeleeAbility(IDefensiveMeleeAbility ability)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Mob ExecuteOffensiveMeleeAbility(IOffensiveMeleeRageAbility ability, Mob mob)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Mob ExecuteCCMeleeAbility(ICCMeleeAbility ability, Mob mob)
+        {
+            throw new NotImplementedException();
         }
     }
 }

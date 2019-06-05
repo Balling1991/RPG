@@ -1,15 +1,16 @@
 ﻿namespace RPG.Heroes.Abilities.HunterAbilities.Offensive
 {
-    public class InstantArrow : OffensiveMeleeAbility
+    public class InstantArrow : IOffensiveMeleeEnergyAbility
     {
         private const string AbilityName = "Instant Arrow";
         private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 3;
+        private const int BaseDamage = 12;
+        private const int EnergyCost = 45;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public InstantArrow()
         {
-            BaseDamage = 12;
-            EnergyCost = 45;
         }
 
         public int CalculateDamage(int agility)
@@ -17,24 +18,39 @@
             return BaseDamage + agility;
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
         }
 
-        public override int GetDamage()
+        public int GetDamage()
+        {
+            return BaseDamage;
+        }
+
+        public int GetEnergyCost()
+        {
+            return EnergyCost;
+        }
+
+        public int GetEnergyGain()
         {
             throw new System.NotImplementedException();
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
         }
     }
 }

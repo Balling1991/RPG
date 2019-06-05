@@ -7,14 +7,14 @@ namespace RPG
     public class Game : IGame
     {
         public bool _isPlaying;
-        public List<Character> CharacterList;
-        public CharacterFlow CharacterFlow;
+        public List<Character> _characterList;
+        public CharacterFlow _characterFlow;
 
         public Game()
         {
             _isPlaying = true;
-            CharacterList = new List<Character>();
-            CharacterFlow = new CharacterFlow(this, CharacterList);
+            _characterList = new List<Character>();
+            _characterFlow = new CharacterFlow(this, _characterList);
         }
 
         public bool IsPlaying()
@@ -22,7 +22,7 @@ namespace RPG
             return _isPlaying;
         }
 
-        public void SetIsPLaying(bool isPlaying)
+        public void SetIsPlaying(bool isPlaying)
         {
             _isPlaying = isPlaying;
         }
@@ -46,14 +46,14 @@ namespace RPG
             switch (choice)
             {
                 case "0":
-                    SetIsPLaying(false);
+                    SetIsPlaying(false);
                     break;
                 case "1":
-                    var newCharacter = CharacterFlow.CreateNewCharacter();
-                    CharacterFlow.SaveNewCharacter(newCharacter, CharacterList);
+                    var newCharacter = _characterFlow.CreateNewCharacter();
+                    _characterFlow.SaveNewCharacter(newCharacter, _characterList);
                     break;
                 case "2":
-                    CharacterFlow.ShowCharacterList(CharacterList);
+                    _characterFlow.ShowCharacterList(_characterList);
                     break;
                 default:
                     Console.WriteLine("\nPlease make a choice from the menu");

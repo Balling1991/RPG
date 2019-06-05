@@ -1,37 +1,47 @@
 ﻿namespace RPG.Heroes.Abilities.MageAbilities.Defensive
 {
-    public class ManaShield : DefensiveSpellAbility
+    public class ManaShield : IDefensiveSpellAbility
     {
         private const string AbilityName = "Mana Shield";
-        private const AbilityType Type = AbilityType.DefensiveSpell;
         private const int AvailabilityLevel = 6;
+        private const int BaseArmor = 5;
+        private const int BaseSpellResistance = 15;
+        private const int ManaCost = 30;
+        private const AbilityType Type = AbilityType.DefensiveSpell;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public ManaShield()
         {
-            BaseArmor = 5;
-            BaseResistance = 15;
-            BaseHealing = 0;
-            ManaCost = 30;
         }
 
         public int CalculateResistance(int intellect)
         {
-            return BaseResistance + intellect;
+            return BaseSpellResistance + intellect;
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
+        }
+
+        public int GetManaCost()
+        {
+            return ManaCost;
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
         }
     }
 }

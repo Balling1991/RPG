@@ -1,16 +1,16 @@
 ﻿namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
 {
-    public class BleedDOT : OffensiveMeleeAbility
+    public class BleedDOT : IOffensiveMeleeRageAbility
     {
         private const string AbilityName = "Bleed";
-        private const AbilityType Type = AbilityType.OffensiveMelee;
         private const int AvailabilityLevel = 4;
-        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Spender;
+        private const int BaseDamage = 2;
+        private const int RageCost = 20;
+        private const AbilityType Type = AbilityType.OffensiveMelee;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public BleedDOT()
         {
-            BaseDamage = 2;
-            EnergyCost = 20;
         }
 
         public int CalculateDamage(int strength)
@@ -18,24 +18,39 @@
             return BaseDamage + (strength / 3);
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
         }
 
-        public override int GetDamage()
+        public int GetDamage()
         {
-            throw new System.NotImplementedException();
+            return BaseDamage;
+        }
+
+        public int GetRageCost()
+        {
+            return RageCost;
+        }
+
+        public int GetRageGain(bool isCrit)
+        {
+            return 0;
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
         }
     }
 }

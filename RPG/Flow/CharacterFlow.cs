@@ -69,6 +69,8 @@ namespace RPG.Flow
         {
             int menuCount = 0;
 
+            Console.WriteLine("\n");
+
             foreach (HeroClass hero in Enum.GetValues(typeof(HeroClass)))
             {
                 Console.WriteLine(menuCount + " - " + hero);

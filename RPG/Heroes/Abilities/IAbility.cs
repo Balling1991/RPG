@@ -3,9 +3,8 @@
     public interface IAbility
     {
         string GetAbilityName();
-
-        AbilityType GetAbilityType();
-
         int GetAvailabilityLevel();
+        AbilityType GetAbilityType();
+        AbilityResourceKind GetResourceKind();
     }
 }

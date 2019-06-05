@@ -1,4 +1,7 @@
-﻿namespace RPG.Heroes
+﻿using RPG.Heroes.Abilities;
+using RPG.NPC.HostileCreatures;
+
+namespace RPG.Heroes
 {
     public class Hunter : Character
     {

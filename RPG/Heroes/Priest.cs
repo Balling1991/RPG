@@ -1,11 +1,12 @@
 ﻿using RPG.Heroes.Abilities;
 using RPG.Heroes.Abilities.PriestAbilities.Defensive;
 using RPG.Heroes.Abilities.PriestAbilities.Offensive;
+using RPG.NPC.HostileCreatures;
 using System.Collections.Generic;
 
 namespace RPG.Heroes
 {
-    public class Priest : Character
+    public class Priest : SpellCharacter
     {
         public Priest(string name) : base(name)
         {
@@ -35,6 +36,21 @@ namespace RPG.Heroes
                 { "Lesser Heal", new LesserHeal() },
                 { "Light Aura", new LightAuraHOT() }
             };
+        }
+
+        public override Mob ExecuteCCSpellAbility(ICCSpellAbility ability, Mob mob)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override Mob ExecuteDefensiveSpellAbility(IDefensiveSpellAbility ability)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override Mob ExecuteOffensiveSpellAbility(IOffensiveSpellAbility ability, Mob mob)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

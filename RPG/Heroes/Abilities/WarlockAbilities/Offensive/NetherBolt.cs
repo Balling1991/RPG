@@ -1,15 +1,16 @@
 ﻿namespace RPG.Heroes.Abilities.WarlockAbilities.Offensive
 {
-    public class NetherBolt : OffensiveSpellAbility
+    public class NetherBolt : IOffensiveSpellAbility
     {
         private const string AbilityName = "Netherbolt";
-        private const AbilityType Type = AbilityType.OffensiveSpell;
         private const int AvailabilityLevel = 1;
+        private const int BaseDamage = 13;
+        private const int ManaCost = 40;
+        private const AbilityType Type = AbilityType.OffensiveSpell;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public NetherBolt()
         {
-            BaseDamage = 13;
-            ManaCost = 40;
         }
 
         public int CalculateDamage(int intellect)
@@ -17,19 +18,29 @@
             return BaseDamage + intellect;
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
+        }
+
+        public int GetManaCost()
+        {
+            return ManaCost;
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
         }
     }
 }

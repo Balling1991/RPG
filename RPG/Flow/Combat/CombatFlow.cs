@@ -1,4 +1,5 @@
-﻿using RPG.Heroes.Abilities;
+﻿using RPG.Heroes;
+using RPG.Heroes.Abilities;
 using RPG.NPC.HostileCreatures;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ namespace RPG.Flow.Combat
 {
     public class CombatFlow
     {
-        private GameFlow _gameFlow;
-        private Character _character;
+        private readonly GameFlow _gameFlow;
+        private readonly Character _character;
         private bool _isFighting = false;
 
         public CombatFlow(GameFlow gameFlow, Character character)
@@ -75,17 +76,17 @@ namespace RPG.Flow.Combat
             int rounds = 0;
 
             var playerTurn = random.Next(1, 2);
-            mob.HP = mob.GetMaxHP();
+            mob.SetHp(mob.GetMaxHP());
 
             string FightMenuChoice;
 
             while (_isFighting)
             {
-                bool roundCompleted = CheckCombatRound();
+                //bool roundCompleted = CheckCombatRound();
 
-                if(roundCompleted()) {
-                    rounds += 1;
-                }
+                //if(roundCompleted()) {
+                //    rounds += 1;
+                //}
 
                 if (playerTurn == 1) {
                     Console.Clear();
@@ -111,7 +112,8 @@ namespace RPG.Flow.Combat
                     }
 
                     abilityToExecute = _character.GetAbility(abilityList[choice]);
-                    mob = _character.ExecuteAbility(abilityToExecute, mob);
+                    if(_character is MeleeCharacter)
+                        mob = _character.ExecuteAbility(abilityToExecute, mob);
 
                     bool isInCombat = CheckIfStillInCombat(mob);
 
@@ -191,23 +193,20 @@ namespace RPG.Flow.Combat
             int characterLevel = _character.GetLevel();
             int mobLevel = mob.GetLevel();
             int baseXP = (characterLevel * 5) + 45;
-            int xpAwarded;
 
             if (characterLevel == mobLevel)
             {
-                xpAwarded = baseXP;
+                return baseXP;
             }
             else if (characterLevel < mobLevel)
             {
-                xpAwarded = (int)Math.Round(baseXP * (1 + 0.05 * (mobLevel - characterLevel)));
+                return (int)Math.Round(baseXP * (1 + 0.05 * (mobLevel - characterLevel)));
             }
             else
             {
                 int zd = CalculateZDValue(characterLevel);
-                xpAwarded = (int)Math.Round(baseXP * (1 - (characterLevel - mobLevel) / (double)zd));
+                return (int)Math.Round(baseXP * (1 - (characterLevel - mobLevel) / (double)zd));
             }
-
-            return xpAwarded;
         }
 
         private int CalculateZDValue(int charLevel)
@@ -246,11 +245,6 @@ namespace RPG.Flow.Combat
                 return true;
             
             return false;
-        }
-
-        private void UpdateCharacterResources()
-        {
-            var abilityUsed = _character.GetLatestAbilityUsed();
         }
     }
 }

@@ -1,16 +1,17 @@
 ﻿namespace RPG.Heroes.Abilities.WarlockAbilities.Defensive
 {
-    public class DarkPact : DefensiveSpellAbility
+    public class DarkPact : IDefensiveSpellAbility
     {
         private const string AbilityName = "Dark Pact";
-        private const AbilityType Type = AbilityType.DefensiveSpell;
         private const int AvailabilityLevel = 6;
+        private const int ManaCost = 28;
+        private const int BaseArmor = 5;
+        private const int BaseSpellResistance = 6;
+        private const AbilityType Type = AbilityType.DefensiveSpell;
+        private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public DarkPact()
         {
-            BaseArmor = 5;
-            BaseResistance = 6;
-            BaseHealing = 0;
         }
 
         public int CalculateArmor(int intellect)
@@ -20,22 +21,32 @@
 
         public int CalculateResistance(int intellect)
         {
-            return BaseResistance + (intellect / 3);
+            return BaseSpellResistance + (intellect / 3);
         }
 
-        public override string GetAbilityName()
+        public string GetAbilityName()
         {
             return AbilityName;
         }
 
-        public override AbilityType GetAbilityType()
+        public AbilityType GetAbilityType()
         {
             return Type;
         }
 
-        public override int GetAvailabilityLevel()
+        public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
+        }
+
+        public int GetManaCost()
+        {
+            return ManaCost;
+        }
+
+        public AbilityResourceKind GetResourceKind()
+        {
+            return ResourceKind;
         }
     }
 }

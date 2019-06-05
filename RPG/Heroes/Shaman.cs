@@ -1,6 +1,7 @@
 ﻿using RPG.Heroes.Abilities;
 using RPG.Heroes.Abilities.ShamanAbilities.Defensive;
 using RPG.Heroes.Abilities.ShamanAbilities.Offensive;
+using RPG.NPC.HostileCreatures;
 using System.Collections.Generic;
 
 namespace RPG.Heroes

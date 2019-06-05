@@ -39,8 +39,6 @@ namespace RPG
             }
         }
 
-        public abstract void SetCharacterStateAfterRound();
-
         public void SetIsCCed(int rounds)
         {
             if(rounds > 0)
@@ -54,78 +52,26 @@ namespace RPG
 
         public Mob ExecuteAbility(IAbility ability, Mob mob)
         {
-            switch(ability.GetAbilityType())
+            switch (ability.GetAbilityType())
             {
                 case AbilityType.OffensiveMelee:
-                    return ExecuteOffensiveMeleeAbility((OffensiveMeleeAbility)ability, mob);
+                    return ExecuteOffensiveMeleeAbility((IOffensiveMeleeRageAbility)ability, mob);
                 case AbilityType.OffensiveSpell:
-                    return ExecuteOffensiveSpellAbility((OffensiveSpellAbility)ability, mob);
+                    return ExecuteOffensiveSpellAbility((IOffensiveSpellAbility)ability, mob);
                 case AbilityType.DefensiveMelee:
-                    return ExecuteDefensiveMeleeAbility((DefensiveMeleeAbility)ability);
+                    return ExecuteDefensiveMeleeAbility((IDefensiveMeleeAbility)ability);
                 case AbilityType.DefensiveSpell:
-                    return ExecuteDefensiveSpellAbility((DefensiveSpellAbility)ability);
+                    return ExecuteDefensiveSpellAbility((IDefensiveSpellAbility)ability);
                 case AbilityType.CCMelee:
-                    return ExecuteCCMeleeAbility((CCMeleeAbility)ability, mob);
+                    return ExecuteCCMeleeAbility((ICCMeleeAbility)ability, mob);
                 case AbilityType.CCSpell:
-                    return ExecuteCCSpellAbility((CCSpellAbility)ability, mob);
+                    return ExecuteCCSpellAbility((ICCSpellAbility)ability, mob);
                 default:
                     Console.WriteLine("Ability not known");
                     return mob;
             }
         }
 
-        private Mob ExecuteOffensiveMeleeAbility(OffensiveMeleeAbility ability, Mob mob)
-        {
-            var damage = ability.GetDamage();
-            var mobHp = mob.GetHP();
-
-            mob.HP = mobHp - damage;
-            CharacterState.LatestDamageDone = damage;
-
-            if(CharacterState.CurrentRage > 75) {
-                CharacterState.CurrentRage = 100;
-            } else {
-                CharacterState.CurrentRage += 25;
-            }
-
-            if (mob.HP < 0)
-                mob.HP = 0;
-
-            return mob;
-        }
-
-        private Mob ExecuteOffensiveSpellAbility(OffensiveSpellAbility ability, Mob mob)
-        {
-            var damage = ability.GetDamage();
-            var mobHp = mob.GetHP();
-
-            mob.HP = mobHp - damage;
-            CharacterState.LatestDamageDone = damage;
-
-            return mob;
-        }
-
-        private Mob ExecuteDefensiveMeleeAbility(DefensiveMeleeAbility ability)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Mob ExecuteDefensiveSpellAbility(DefensiveSpellAbility ability)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Mob ExecuteCCMeleeAbility(CCMeleeAbility ability, Mob mob)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Mob ExecuteCCSpellAbility(CCSpellAbility ability, Mob mob)
-        {
-            throw new NotImplementedException();
-        }
-
-        // Setters
         public void SetXP(int xpAwarded)
         {
             Stats.Exp += xpAwarded;
@@ -186,6 +132,6 @@ namespace RPG
 
         // State
         public int GetLatestDamageDone() => CharacterState.LatestDamageDone;
-        public int GetLatestAbilityUsed() => CharacterState.GetLatestAbilityUsed;
+        public IAbility GetLatestAbilityUsed() => CharacterState.LatestAbilityUsed;
     }
 }
