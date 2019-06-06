@@ -3,7 +3,7 @@
     public class InstantArrow : IOffensiveMeleeEnergyAbility
     {
         private const string AbilityName = "Instant Arrow";
-        private const AbilityType Type = AbilityType.OffensiveMelee;
+        private const AbilityType Type = AbilityType.OffensiveEnergyMelee;
         private const int AvailabilityLevel = 3;
         private const int BaseDamage = 12;
         private const int EnergyCost = 45;

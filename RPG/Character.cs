@@ -1,4 +1,5 @@
 ﻿using RPG.CharacterProps;
+using RPG.Heroes;
 using RPG.Heroes.Abilities;
 using RPG.NPC.HostileCreatures;
 using System;
@@ -54,8 +55,12 @@ namespace RPG
         {
             switch (ability.GetAbilityType())
             {
-                case AbilityType.OffensiveMelee:
-                    return ExecuteOffensiveMeleeAbility((IOffensiveMeleeRageAbility)ability, mob);
+                case AbilityType.OffensiveRageMelee:
+                    return ExecuteOffensiveMeleeRageAbility((IOffensiveMeleeRageAbility)ability, mob);
+                case AbilityType.OffensiveEnergyMelee:
+                    return ExecuteOffensiveMeleeEnergyAbility((IOffensiveMeleeEnergyAbility)ability, mob);
+                case AbilityType.OffensiveManaMelee:
+                    return ExecuteOffensiveMeleeManaAbility((IOffensiveMeleeManaAbility)ability, mob);
                 case AbilityType.OffensiveSpell:
                     return ExecuteOffensiveSpellAbility((IOffensiveSpellAbility)ability, mob);
                 case AbilityType.DefensiveMelee:
@@ -71,6 +76,15 @@ namespace RPG
                     return mob;
             }
         }
+        
+        public virtual Mob ExecuteOffensiveMeleeRageAbility(IOffensiveMeleeRageAbility ability, Mob mob) { throw new NotImplementedException(); }
+        public virtual Mob ExecuteOffensiveMeleeEnergyAbility(IOffensiveMeleeEnergyAbility ability, Mob mob) { throw new NotImplementedException(); }
+        public virtual Mob ExecuteOffensiveMeleeManaAbility(IOffensiveMeleeManaAbility ability, Mob mob) { throw new NotImplementedException(); }
+        public virtual Mob ExecuteOffensiveSpellAbility(IOffensiveSpellAbility ability, Mob mob) { throw new NotImplementedException(); }
+        public virtual Mob ExecuteDefensiveMeleeAbility(IDefensiveMeleeAbility ability) { throw new NotImplementedException(); }
+        public virtual Mob ExecuteDefensiveSpellAbility(IDefensiveSpellAbility ability) { throw new NotImplementedException(); }
+        public virtual Mob ExecuteCCMeleeAbility(ICCMeleeAbility ability, Mob mob) { throw new NotImplementedException(); }
+        public virtual Mob ExecuteCCSpellAbility(ICCSpellAbility ability, Mob mob) { throw new NotImplementedException(); }
 
         public void SetXP(int xpAwarded)
         {
@@ -84,7 +98,7 @@ namespace RPG
         }
 
         private void CheckIfLeveledUp() {
-        if (Stats.Exp > Stats.ExpToNextLvl)
+        while (Stats.Exp > Stats.ExpToNextLvl)
             {
                 Stats.Exp -= Stats.ExpToNextLvl;
                 Stats.Level++;

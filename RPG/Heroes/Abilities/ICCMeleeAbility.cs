@@ -4,5 +4,6 @@
     {
         int GetRageCost();
         int GetDuration();
+        bool GetBreakOnAttack();
     }
 }

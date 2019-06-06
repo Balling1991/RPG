@@ -1,4 +1,5 @@
 ﻿using RPG.Flow;
+using RPG.Heroes;
 using System;
 using System.Collections.Generic;
 

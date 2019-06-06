@@ -1,6 +1,6 @@
 ﻿namespace RPG.Heroes.Abilities
 {
-    public interface IOffensiveSpellAbility : IAbility
+    public interface IOffensiveMeleeManaAbility
     {
         int GetDamage();
         int GetManaCost();

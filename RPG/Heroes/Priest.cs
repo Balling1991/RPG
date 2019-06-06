@@ -1,12 +1,13 @@
 ﻿using RPG.Heroes.Abilities;
 using RPG.Heroes.Abilities.PriestAbilities.Defensive;
 using RPG.Heroes.Abilities.PriestAbilities.Offensive;
+using RPG.Heroes.CharacterTypes;
 using RPG.NPC.HostileCreatures;
 using System.Collections.Generic;
 
 namespace RPG.Heroes
 {
-    public class Priest : SpellCharacter
+    public class Priest : SpellManaCharacter
     {
         public Priest(string name) : base(name)
         {

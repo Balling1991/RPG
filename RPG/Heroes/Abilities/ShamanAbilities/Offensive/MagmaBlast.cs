@@ -33,6 +33,11 @@
             return AvailabilityLevel;
         }
 
+        public int GetDamage()
+        {
+            return BaseDamage;
+        }
+
         public int GetManaCost()
         {
             return ManaCost;

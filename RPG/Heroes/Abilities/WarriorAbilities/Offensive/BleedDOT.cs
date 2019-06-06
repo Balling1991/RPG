@@ -6,7 +6,7 @@
         private const int AvailabilityLevel = 4;
         private const int BaseDamage = 2;
         private const int RageCost = 20;
-        private const AbilityType Type = AbilityType.OffensiveMelee;
+        private const AbilityType Type = AbilityType.OffensiveRageMelee;
         private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public BleedDOT()

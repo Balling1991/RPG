@@ -8,7 +8,7 @@ namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
         private const int AvailabilityLevel = 1;
         private const int BaseDamage = 5;
         private const int RageCost = 20;
-        private const AbilityType Type = AbilityType.OffensiveMelee;
+        private const AbilityType Type = AbilityType.OffensiveRageMelee;
         private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
         private readonly int MinDmg;
         private readonly int MaxDmg;

@@ -6,7 +6,7 @@
         private const int AvailabilityLevel = 4;
         private const int BaseDamage = 9;
         private const int EnergyCost = 25;
-        private const AbilityType Type = AbilityType.OffensiveMelee;
+        private const AbilityType Type = AbilityType.OffensiveEnergyMelee;
         private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public VenomStrike()

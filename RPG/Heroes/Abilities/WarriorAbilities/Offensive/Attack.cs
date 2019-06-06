@@ -8,7 +8,7 @@ namespace RPG.Heroes.Abilities.WarriorAbilities.Offensive
         private const int AvailabilityLevel = 1;
         private const int BaseRageGain = 23;
         private const int CritRageGain = 30;
-        private const AbilityType Type = AbilityType.OffensiveMelee;
+        private const AbilityType Type = AbilityType.OffensiveRageMelee;
         private const AbilityResourceKind ResourceKind = AbilityResourceKind.Gainer;
 
         private readonly int MinMelee;

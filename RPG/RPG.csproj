@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="Heroes\Abilities\AssassinAbilities\Defensive\" />
     <Folder Include="Heroes\Abilities\HunterAbilities\Defensive\" />
-    <Folder Include="Heroes\Abilities\WarriorAbilities\Defensive\" />
     <Folder Include="Items\Back\" />
     <Folder Include="Items\Chest\" />
     <Folder Include="Items\Feet\" />
@@ -41,7 +40,6 @@
     <Folder Include="Items\Weapons\MeleeWeapons\Daggers\" />
     <Folder Include="Items\Weapons\MeleeWeapons\Maces\" />
     <Folder Include="Items\Weapons\MeleeWeapons\Polearms\" />
-    <Folder Include="Items\Weapons\MeleeWeapons\Swords\" />
     <Folder Include="Items\Weapons\RangedWeapons\Bows\" />
     <Folder Include="Items\Wrist\" />
   </ItemGroup>

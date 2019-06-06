@@ -1,5 +1,6 @@
 ﻿using RPG.Heroes;
 using RPG.Heroes.Abilities;
+using RPG.Heroes.CharacterTypes;
 using RPG.NPC.HostileCreatures;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,8 @@ namespace RPG.Flow.Combat
             List<string> abilityList = new List<string>(_character.GetAbilities().Keys);
             Random random = new Random();
             int rounds = 0;
+            bool playerHadATurn = false;
+            bool mobHadATurn = false;
 
             var playerTurn = random.Next(1, 2);
             mob.SetHp(mob.GetMaxHP());
@@ -82,23 +85,18 @@ namespace RPG.Flow.Combat
 
             while (_isFighting)
             {
-                //bool roundCompleted = CheckCombatRound();
-
-                //if(roundCompleted()) {
-                //    rounds += 1;
-                //}
+                if (CheckCombatRound(playerHadATurn, mobHadATurn))
+                {
+                    rounds += 1;
+                    playerHadATurn = false;
+                    mobHadATurn = false;
+                }
 
                 if (playerTurn == 1) {
                     Console.Clear();
                     Console.WriteLine("\n** COMBAT MENU **");
 
-                    for (int i = 0; i < abilityList.Count; i++)
-                    {
-                        Console.WriteLine($"{i}: {abilityList[i]}");
-                    }
-                    Console.WriteLine($"\nYour HP: {_character.GetHP()}");
-                    Console.WriteLine($"{mob.GetCreepKind()} HP: {mob.HP}");
-                    Console.Write("\nChoice: ");
+                    StatsAndAbilityTextOutput(abilityList, mob);
 
                     FightMenuChoice = Console.ReadKey().KeyChar.ToString();
 
@@ -112,7 +110,7 @@ namespace RPG.Flow.Combat
                     }
 
                     abilityToExecute = _character.GetAbility(abilityList[choice]);
-                    if(_character is MeleeCharacter)
+                    if(_character is MeleeRageCharacter)
                         mob = _character.ExecuteAbility(abilityToExecute, mob);
 
                     bool isInCombat = CheckIfStillInCombat(mob);
@@ -122,6 +120,7 @@ namespace RPG.Flow.Combat
                         Console.WriteLine($"You hit the {mob.GetCreepKind()} for {_character.GetLatestDamageDone()} damage");
                     }
                     playerTurn = 2;
+                    playerHadATurn = true;
                 }
                 else if (playerTurn == 2)
                 {
@@ -141,6 +140,7 @@ namespace RPG.Flow.Combat
                         Console.ReadKey();
                     }
                     playerTurn = 1;
+                    mobHadATurn = true;
                 }
             }
         }
@@ -152,6 +152,17 @@ namespace RPG.Flow.Combat
             Console.WriteLine("Attacking..");
             Thread.Sleep(1000);
             Console.WriteLine("------------------------");
+        }
+
+        private void StatsAndAbilityTextOutput(List<string> abilityList, Mob mob)
+        {
+            for (int i = 0; i < abilityList.Count; i++)
+            {
+                Console.WriteLine($"{i}: {abilityList[i]}");
+            }
+            Console.WriteLine($"\nYour HP: {_character.GetHP()}");
+            Console.WriteLine($"{mob.GetCreepKind()} HP: {mob.HP}");
+            Console.Write("\nChoice: ");
         }
 
         private bool CheckIfStillInCombat(Mob mob)

@@ -1,10 +1,12 @@
 ﻿using RPG.Heroes.Abilities;
 using RPG.Heroes.Abilities.AssassinAbilities.Offensive;
+using RPG.Heroes.CharacterTypes;
+using RPG.NPC.HostileCreatures;
 using System.Collections.Generic;
 
 namespace RPG.Heroes
 {
-    public class Assassin : Character
+    public class Assassin : MeleeEnergyCharacter
     {
         public Assassin(string name) : base(name)
         {
@@ -33,6 +35,21 @@ namespace RPG.Heroes
                 { "Stab", new Stab() },
                 { "Venom Strike", new VenomStrike() }
             };
+        }
+
+        public override Mob ExecuteOffensiveMeleeEnergyAbility(IOffensiveMeleeEnergyAbility ability, Mob mob)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override Mob ExecuteDefensiveMeleeAbility(IDefensiveMeleeAbility ability)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override Mob ExecuteCCMeleeAbility(ICCMeleeAbility ability, Mob mob)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

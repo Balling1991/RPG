@@ -13,11 +13,6 @@
         {
         }
 
-        public int CalculateDamage(int intellect)
-        {
-            return BaseDamage + intellect;
-        }
-
         public string GetAbilityName()
         {
             return AbilityName;
@@ -31,6 +26,11 @@
         public int GetAvailabilityLevel()
         {
             return AvailabilityLevel;
+        }
+
+        public int GetDamage()
+        {
+            return BaseDamage;
         }
 
         public int GetManaCost()

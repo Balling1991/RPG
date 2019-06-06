@@ -1,12 +1,15 @@
 ﻿using RPG.Heroes.Abilities;
+using RPG.Heroes.Abilities.WarriorAbilities.CC;
+using RPG.Heroes.Abilities.WarriorAbilities.Defensive;
 using RPG.Heroes.Abilities.WarriorAbilities.Offensive;
+using RPG.Heroes.CharacterTypes;
 using RPG.NPC.HostileCreatures;
 using System;
 using System.Collections.Generic;
 
 namespace RPG.Heroes
 {
-    public class Warrior : MeleeCharacter
+    public class Warrior : MeleeRageCharacter
     {
         private const int MaxRage = 100;
 
@@ -42,16 +45,18 @@ namespace RPG.Heroes
             {
                 { "Attack", new Attack(OffensiveStats.MinMelee, OffensiveStats.MaxMelee) },
                 { "Strike", new Strike(OffensiveStats.MinMelee, OffensiveStats.MaxMelee) },
-                { "Bleed",  new BleedDOT() }
+                { "Bleed",  new BleedDOT() },
+                { "Block", new Block() },
+                { "Tremble", new Tremble() }
             };
         }
 
-        public override Mob ExecuteOffensiveMeleeAbility(IOffensiveMeleeRageAbility ability, Mob mob)
+        public override Mob ExecuteOffensiveMeleeRageAbility(IOffensiveMeleeRageAbility ability, Mob mob)
         {
-            bool canExecute = CanExecuteAbility(ability);
+            AbilityCheckState state = CanExecuteAbility(ability, MaxRage);
 
-            if (canExecute)
-                mob = ExecuteAbility(ability, mob);
+            if (state.CanExecute)
+                mob = ExecuteAbility(ability, mob, state);
             else
                 Console.WriteLine("\nYou don't have enough rage to execute that ability");
 
@@ -68,43 +73,7 @@ namespace RPG.Heroes
             throw new NotImplementedException();
         }
 
-        private bool CanExecuteAbility(IOffensiveMeleeRageAbility ability)
-        {
-            if (ability is Attack)
-                return true;
-
-            if (CurrentRage < ability.GetRageCost())
-                return false;
-            else if ((MaxRage - ability.GetRageCost()) < ability.GetRageCost())
-                return false;
-            else
-            return true;
-        }
-
-        private Mob ExecuteAbility(IOffensiveMeleeRageAbility ability, Mob mob)
-        {
-            var damage = ability.GetDamage();
-
-            mob.SetHp(mob.HP - damage);
-            CharacterState.LatestDamageDone = damage;
-            CharacterState.LatestAbilityUsed = ability;
-            UpdateRage(ability);
-
-            return mob;
-        }
-
-        private void UpdateRage(IOffensiveMeleeRageAbility ability)
-        {
-            if (ability is Attack)
-                CurrentRage += ability.GetRageGain(false);
-
-            if (CanExecuteAbility(ability))
-            {
-                CurrentRage -= ability.GetRageCost();
-            }
-        }
-
-        private void SetRageGain(Attack meleeAttack, bool wasCrit)
+        private void CalculateRageGain(Attack meleeAttack, bool wasCrit)
         {
             int rageGain;
 
@@ -118,8 +87,5 @@ namespace RPG.Heroes
             else
                 CurrentRage += rageGain;
         }
-
-        public int BaseRage { get; private set; }
-        public int CurrentRage { get; private set; }
     }
 }

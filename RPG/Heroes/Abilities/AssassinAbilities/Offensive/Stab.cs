@@ -6,7 +6,7 @@
         private const int AvailabilityLevel = 1;
         private const int BaseDamage = 5;
         private const int EnergyCost = 35;
-        private const AbilityType Type = AbilityType.OffensiveMelee;
+        private const AbilityType Type = AbilityType.OffensiveEnergyMelee;
         private const AbilityResourceKind ResourceKind = AbilityResourceKind.Consumer;
 
         public Stab()

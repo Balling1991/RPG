@@ -2,7 +2,9 @@
 {
     public enum AbilityType
     {
-        OffensiveMelee,
+        OffensiveRageMelee,
+        OffensiveEnergyMelee,
+        OffensiveManaMelee,
         OffensiveSpell,
         DefensiveMelee,
         DefensiveSpell,
