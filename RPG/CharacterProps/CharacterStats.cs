@@ -1,4 +1,6 @@
-﻿namespace RPG.CharacterProps
+﻿using RPG.Heroes;
+
+namespace RPG.CharacterProps
 {
     public class CharacterStats
     {
@@ -9,5 +11,7 @@
         public int ExpToNextLvl { get; set; }
         public int HP { get; set; }
         public int MaxHP { get; set; }
+        public int ResourceAmount { get; set; }
+        public ResourceType ResourceType { get; set; }
     }
 }

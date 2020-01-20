@@ -21,8 +21,8 @@ namespace RPG.Heroes
 
             // Stats
             Attributes.Stamina = 13;
-            Attributes.Strength = 8;
-            Attributes.Agility = 10;
+            Attributes.Strength = 10;
+            Attributes.Agility = 8;
             Attributes.Intellect = 5;
 
             // Offense

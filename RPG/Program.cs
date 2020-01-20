@@ -1,15 +1,15 @@
-﻿namespace RPG
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Game game = new Game();
+﻿using StructureMap;
 
-            while (game._isPlaying)
-            {
-                game.MainMenu();
-            }
+namespace RPG
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var container = Container.For<ConsoleRegistry>();
+            var app = container.GetInstance<Application>();
+
+            app.Run();
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using RPG.Heroes;
-using RPG.Heroes.Abilities;
+﻿using RPG.Heroes.Abilities;
 using RPG.Heroes.CharacterTypes;
+using RPG.Navigation;
 using RPG.NPC.HostileCreatures;
 using System;
 using System.Collections.Generic;
@@ -8,16 +8,18 @@ using System.Threading;
 
 namespace RPG.Flow.Combat
 {
-    public class CombatFlow
+    public class CombatFlow : ICombatFlow
     {
-        private readonly GameFlow _gameFlow;
-        private readonly Character _character;
+        private readonly IGameState _gameState;
+        private readonly Lazy<INavigation> _navigation;
         private bool _isFighting = false;
 
-        public CombatFlow(GameFlow gameFlow, Character character)
+        public CombatFlow(
+            IGameState gameState,
+            Lazy<INavigation> navigation)
         {
-            _gameFlow = gameFlow ?? throw new ArgumentNullException(nameof(gameFlow));
-            _character = character ?? throw new ArgumentNullException(nameof(character));
+            _gameState = gameState ?? throw new ArgumentNullException(nameof(gameState));
+            _navigation = navigation ?? throw new ArgumentNullException(nameof(navigation));
         }
 
         public void Fight()
@@ -40,12 +42,12 @@ namespace RPG.Flow.Combat
             switch (CombatMenuChoice)
             {
                 case "0":
-                    _gameFlow.GameMenu();
+                    _navigation.Value.PrintGameMenu();
                     break;
                 case "1":
                     var mob = GenerateRandomMob();
                     FightRandomMob(mob);
-                    _gameFlow.GameMenu();
+                    _navigation.Value.PrintGameMenu();
                     break;
                 default:
                     Console.WriteLine("\nPlease make a choice from the menu");
@@ -53,7 +55,7 @@ namespace RPG.Flow.Combat
             }
         }
 
-        private Mob GenerateRandomMob()
+        public Mob GenerateRandomMob()
         {
             Random randomNumber = new Random();
             var mobNumber = randomNumber.Next(0, 0);
@@ -62,17 +64,17 @@ namespace RPG.Flow.Combat
             switch (mobNumber)
             {
                 case 0:
-                    return new Deer(_character.GetLevel());
+                    return new Deer(_gameState.GetCurrentCharacter().GetLevel());
                 default:
-                    return new Deer(_character.GetLevel());
+                    return new Deer(_gameState.GetCurrentCharacter().GetLevel());
             }
         }
 
-        private void FightRandomMob(Mob mob)
+        public void FightRandomMob(Mob mob)
         {
             _isFighting = true;
             IAbility abilityToExecute;
-            List<string> abilityList = new List<string>(_character.GetAbilities().Keys);
+            List<string> abilityList = new List<string>(_gameState.GetCurrentCharacter().GetAbilities().Keys);
             Random random = new Random();
             int rounds = 0;
             bool playerHadATurn = false;
@@ -109,15 +111,15 @@ namespace RPG.Flow.Combat
                         Console.WriteLine("You didn't press an ability, so we basic attacked for you");
                     }
 
-                    abilityToExecute = _character.GetAbility(abilityList[choice]);
-                    if(_character is MeleeRageCharacter)
-                        mob = _character.ExecuteAbility(abilityToExecute, mob);
+                    abilityToExecute = _gameState.GetCurrentCharacter().GetAbility(abilityList[choice]);
+                    if(_gameState.GetCurrentCharacter() is MeleeRageCharacter)
+                        mob = _gameState.GetCurrentCharacter().ExecuteAbility(abilityToExecute, mob);
 
                     bool isInCombat = CheckIfStillInCombat(mob);
 
                     if (isInCombat)
                     {
-                        Console.WriteLine($"You hit the {mob.GetCreepKind()} for {_character.GetLatestDamageDone()} damage");
+                        Console.WriteLine($"You hit the {mob.GetCreepKind()} for {_gameState.GetCurrentCharacter().GetLatestDamageDone()} damage");
                     }
                     playerTurn = 2;
                     playerHadATurn = true;
@@ -129,7 +131,7 @@ namespace RPG.Flow.Combat
 
                     AttackTextOutput();
 
-                    mob.Attack(_character);
+                    mob.Attack(_gameState.GetCurrentCharacter());
 
                     bool isInCombat = CheckIfStillInCombat(mob);
 
@@ -160,18 +162,19 @@ namespace RPG.Flow.Combat
             {
                 Console.WriteLine($"{i}: {abilityList[i]}");
             }
-            Console.WriteLine($"\nYour HP: {_character.GetHP()}");
-            Console.WriteLine($"{mob.GetCreepKind()} HP: {mob.HP}");
+            Console.WriteLine($"\n{_gameState.GetCurrentCharacter().GetName()} - {_gameState.GetCurrentCharacter().GetHeroClass()} - Lvl. {_gameState.GetCurrentCharacter().GetLevel()}");
+            Console.WriteLine($"HP: {_gameState.GetCurrentCharacter().GetHP()} | {_gameState.GetCurrentCharacter().GetResourceType().ToString()}: {_gameState.GetCurrentCharacter().GetResourceAmount()}");
+            Console.WriteLine($"\n{mob.GetCreepKind()} HP: {mob.HP}");
             Console.Write("\nChoice: ");
         }
 
         private bool CheckIfStillInCombat(Mob mob)
         {
-            if (_character.GetHP() == 0)
+            if (_gameState.GetCurrentCharacter().GetHP() <= 0)
             {
                 _isFighting = false;
                 // For testing
-                _character.Stats.HP = _character.Stats.MaxHP;
+                _gameState.GetCurrentCharacter().Stats.HP = _gameState.GetCurrentCharacter().Stats.MaxHP;
                 //
                 Console.Clear();
                 Console.WriteLine($"The {mob.GetCreepKind()} killed you with {mob.GetHP()} hp left");
@@ -180,18 +183,18 @@ namespace RPG.Flow.Combat
                 return false;
             }
 
-            if (mob.GetHP() == 0)
+            if (mob.GetHP() <= 0)
             {
                 _isFighting = false;
 
                 // For testing
-                _character.Stats.HP = _character.Stats.MaxHP;
+                _gameState.GetCurrentCharacter().Stats.HP = _gameState.GetCurrentCharacter().Stats.MaxHP;
                 //
                 int xpAwarded = CalculateXPAwarded(mob);
 
                 Console.WriteLine($"\nYou defeated a lvl {mob.GetLevel()} {mob.GetCreepKind()} and was awarded {xpAwarded} xp");
-                Console.WriteLine($"{_character.GetExp()} + {xpAwarded}/{_character.GetExpToNextLevel()} xp to next lvl");
-                _character.SetXP(xpAwarded);
+                Console.WriteLine($"{_gameState.GetCurrentCharacter().GetExp()} + {xpAwarded}/{_gameState.GetCurrentCharacter().GetExpToNextLevel()} xp to next lvl");
+                _gameState.GetCurrentCharacter().SetXP(xpAwarded);
                 Console.WriteLine("Go back ..");
                 Console.ReadKey();
                 return false;
@@ -201,7 +204,7 @@ namespace RPG.Flow.Combat
 
         private int CalculateXPAwarded(Mob mob)
         {
-            int characterLevel = _character.GetLevel();
+            int characterLevel = _gameState.GetCurrentCharacter().GetLevel();
             int mobLevel = mob.GetLevel();
             int baseXP = (characterLevel * 5) + 45;
 

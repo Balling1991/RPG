@@ -1,26 +1,35 @@
 ﻿using RPG.Heroes;
+using RPG.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace RPG.Flow
 {
-    public class CharacterFlow
+    public class CharacterManager : ICharacterManager
     {
-        private readonly IGame _game;
+        private readonly IGameState _gameState;
+        private readonly Lazy<INavigation> _navigation;
+        private readonly IGameFlow _gameFlow;
         private readonly List<Character> _characterList;
-        private GameFlow _gameFlow;
         public bool _isPlaying;
 
-        public CharacterFlow(IGame game, List<Character> characterList)
+        public CharacterManager(
+            IGameState gameState,
+            Lazy<INavigation> navigation,
+            IGameFlow gameFlow,
+            List<Character> characterList)
         {
-            _game = game ?? throw new ArgumentNullException(nameof(game));
+            _gameState = gameState ?? throw new ArgumentNullException(nameof(gameState));
+            _navigation = navigation ?? throw new ArgumentNullException(nameof(navigation));
+            _gameFlow = gameFlow ?? throw new ArgumentNullException(nameof(gameFlow));
             _characterList = characterList ?? throw new ArgumentNullException(nameof(characterList));
         }
 
         public Character CreateNewCharacter()
         {
-            Console.Write("\nPlease enter the name of your character: ");
+            Console.WriteLine("\n<<<------ CHARACTER CREATION ------>>>");
+            Console.Write("\nCharacter name: ");
             var name = Console.ReadLine();
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
@@ -29,11 +38,10 @@ namespace RPG.Flow
                 Console.WriteLine("Please enter a name to proceed.");
                 CreateNewCharacter();
             }
-                
-            Console.Clear();
-            Console.WriteLine("Please pick your hero class: ");
 
-            ShowCharacterOptions(name);
+            Console.WriteLine("\nHero class: ");
+
+            PrintCharacterOptions();
 
             Console.Write("\nClass nr.: ");
 
@@ -65,49 +73,42 @@ namespace RPG.Flow
             return null;
         }
 
-        public static void ShowCharacterOptions(string name)
+        public void SaveNewCharacter(Character character)
+        {
+            _characterList.Add(character);
+        }
+
+        public void PrintCharacterOptions()
         {
             int menuCount = 0;
 
-            Console.WriteLine("\n");
+            Console.WriteLine();
 
             foreach (HeroClass hero in Enum.GetValues(typeof(HeroClass)))
             {
                 Console.WriteLine(menuCount + " - " + hero);
                 menuCount++;
             }
-
-            Console.WriteLine("--------------");
-            Console.WriteLine("b - Cancel");
         }
 
-        public List<Character> SaveNewCharacter(Character character, List<Character> characterList)
+        public void PrintCharacterList()
         {
-            if(character != null)
-            {
-                characterList.Add(character);
-            }
-            return characterList;
-        }
-
-        public void ShowCharacterList(List<Character> characterList)
-        {
-            if (!characterList.Any())
+            if (!_characterList.Any())
             {
                 Console.WriteLine("You don't have any characters yet. Go make one...");
                 Console.ReadKey();
                 Console.Clear();
             }
 
-            if(characterList.Any())
+            if(_characterList.Any())
             {
-                Console.WriteLine("--- YOUR CHARACTERS ---");
+                Console.WriteLine("<<<------ YOUR CHARACTERS ------>>>");
                 Console.WriteLine();
             }
 
-            for(int i = 0; i < characterList.Count; i++)
+            for(int i = 0; i < _characterList.Count; i++)
             {
-                Console.WriteLine(i + ": " + characterList[i].Stats.Name + " - " + characterList[i].GetHeroClass() + " - lvl " + characterList[i].GetLevel());
+                Console.WriteLine(i + ": " + _characterList[i].Stats.Name + " - " + _characterList[i].GetHeroClass() + " - lvl " + _characterList[i].GetLevel());
             }
 
             Console.WriteLine("\n\nGo back... (space)");
@@ -117,17 +118,17 @@ namespace RPG.Flow
 
             if (int.TryParse(characterFromList, out int characterNumber))
             {
-                ShowCharacterDetails(characterList[characterNumber]);
+                PrintCharacterDetails(_characterList[characterNumber]);
             } else
             {
                 Console.Clear();
             }
         }
 
-        public void ShowCharacterDetails(Character character)
+        public void PrintCharacterDetails(Character character)
         {
             Console.Clear();
-            Console.WriteLine($"\n!---------- CHARACTER ----------");
+            Console.WriteLine($"\n!<<<------ CHARACTER ------>>>");
             Console.WriteLine($"\n Name: {character.GetName()} ||| Class: {character.GetHeroClass()} ||| Lvl: {character.GetLevel()}");
             Console.WriteLine($"\n!---------- STATS ----------");
             Console.WriteLine($"\n|--- BASIC:");
@@ -152,31 +153,22 @@ namespace RPG.Flow
             Console.WriteLine($"|---    Spell resistance: {character.GetSpellResistance()}");
 
             Console.WriteLine($"\n\nType 'P' if you wanna play this character!");
-
             Console.WriteLine("\nGo back...");
+
             var characterChoice = Console.ReadKey().KeyChar.ToString();
 
             if (characterChoice == "P" || characterChoice == "p")
             {
-                GameFlow gameFlow;
-
-                if (_gameFlow != null)
-                {
-                    _gameFlow.SetCharacter(character);
-                    _gameFlow.GameMenu();
-                }
-                else
-                {
-                    gameFlow = new GameFlow(_game, this, character);
-                    _gameFlow = gameFlow;
-                    _gameFlow.GameMenu();
-                }
+                _gameFlow.ChooseCharacter(character);
+                _navigation.Value.PrintGameMenu();
 
                 Console.Clear();
-            } else {
-                Console.Clear();
-                ShowCharacterList(_characterList);
             }
+            else
+            {
+                Console.Clear();
+                PrintCharacterList();
+            }       
         }
     }
 }

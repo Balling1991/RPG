@@ -116,6 +116,8 @@ namespace RPG
         public int GetExpToNextLevel() => ((8 * Stats.Level) * (45 + (5 * Stats.Level)));
         public int GetHP() => Stats.HP;
         public int GetMaxHP() => Stats.MaxHP;
+        public ResourceType GetResourceType() => Stats.ResourceType;
+        public int GetResourceAmount() => Stats.ResourceAmount;
 
         // Stats
         public int GetStamina() => Attributes.Stamina;

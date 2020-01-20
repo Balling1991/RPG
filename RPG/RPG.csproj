@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -40,12 +40,13 @@
     <Folder Include="Items\Weapons\MeleeWeapons\Daggers\" />
     <Folder Include="Items\Weapons\MeleeWeapons\Maces\" />
     <Folder Include="Items\Weapons\MeleeWeapons\Polearms\" />
+    <Folder Include="Items\Weapons\MeleeWeapons\Swords\OneHanded\" />
     <Folder Include="Items\Weapons\RangedWeapons\Bows\" />
     <Folder Include="Items\Wrist\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StructureMap" Version="4.7.0" />
+    <PackageReference Include="StructureMap" Version="4.7.1" />
   </ItemGroup>
 
 </Project>
